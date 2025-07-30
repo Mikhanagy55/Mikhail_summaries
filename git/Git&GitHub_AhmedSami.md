@@ -227,7 +227,9 @@ __________________________________________________________________________
 
 لو جربت ت pass الformat اللي git بيشوفها وبيعملها ل`shasum`  هيطلعلك نفس ال$f(x)$ او نفس الhexadecimal characters.
 وgit بيعمل الsha1 عشان يتأكد ان مفيش اي تغيير. وهي الRequierment الجايه.
+
 ***____________________________________________________________________________________________***
+
 **how can we apply track history?**
 هي الطريقه اللي git بيعرف بيها الfile ده اتغير ولا لا. هيعرف منين انك غيرت الfile؟ هيعرف من ال Sha1 ده.
 هيعرف ان في تعديل في تغيير حصل, لو زودت space واحده حتى, هيطلعلك sha1 تانيه خالص.
@@ -242,7 +244,9 @@ ________________________________________________________________________________
 
 ![Pasted%20image%2020250403143540.png](images/Pasted%20image%2020250403143540.png)
 That is what is called a **two-tree architecture**.
+
 ________________________________________________________________________________
+
 ومش ده الgit بيعمله. git عنده***three-tree architecture***, 
 in Git architecture introduced 
 اكيد عندي الworking directory و الrepo ,في النص مابينهم بقى موجود tree تانيه اسمها `staging Area` او الindex. هو يبان tree لكن هو physically عباره عن file.
@@ -465,7 +469,8 @@ ____________________________________________________________________
 
 عباره عن `wrapper` بيحدد مين اللي عمل الcommit نفسها `Committer Information` واللي عمل التغييرات (الـ `author`) وامتى اتعملت (`timestamp`) والتعديل اللي اتعمل، وكمان بيديك `pointer` للـ `parent commit` اللي قبله، ومنه تقدر تتابع باقي الـ history. و فيه الـ `commit message` اللي بتشرح التغييرات دي عشان يوصفلي التعديل, زي comment كده. و بيوريني فين الtree اللي حصل فيها الكلام ده, عن طريق انه بيوريني اول[^2] root tree اتعدل فيها لو انت عندك اكتر من File عدلت فيهم ف من الـ root tree دي، بقدر أوصل للـ blobs والtrees اللي جوه.
 
-اذاً الcommit هي الwrapper اللي بيقولي ان الblobs او الtrees دول اتعدلت كده مع بعض في مره واحده .![%20Pasted%20image%2020250405153305.png](images/%20Pasted%20image%2020250405153305.png)
+اذاً الcommit هي الwrapper اللي بيقولي ان الblobs او الtrees دول اتعدلت كده مع بعض في مره واحده 
+.![%20Pasted%20image%2020250405153305.png](images/%20Pasted%20image%2020250405153305.png)
 
 و بما ان هو object ف بيبقى ليه `sha1`.
 
@@ -505,10 +510,12 @@ ____________________________________________________________
 # Basic Git operations(add, commit, log, diff, and show)
 
 هجرب بقى اعدل فالfile واكتب line جديد. بعد ما تعمل save(<mark>ctrl + s</mark>) لو بتستخدم IDE زي **VS** هتلاقي اسم الfile اتغير وبقى مكتوب `M` اللي هو`modified` بس بالاحمر.
-نشوف `git status` رأيه ايه بعد التغيير![Pasted%20image%2020250407155249.png](images/Pasted%20image%2020250407155249.png)
+نشوف `git status` رأيه ايه بعد التغيير
+![Pasted%20image%2020250407155249.png](images/Pasted%20image%2020250407155249.png)
 
 قال لي الfile modified وبيديني اقتراحات بما انه اتعدل فبيقولي اعمله staging وبعدين Commit. وبيقولك برضو لو انت غلط و عملت staging وعايز تعمل unstaging  اعمل `git restore`.
-وممكن استخدم `s option-` مع `git status` عشان يلخص الكلام ده, مثلا عندي 50 file هيبقى موال بقى. ![Pasted%20image%2020250407155809.png](images/Pasted%20image%2020250407155809.png)
+وممكن استخدم `s option-` مع `git status` عشان يلخص الكلام ده, مثلا عندي 50 file هيبقى موال بقى.
+![Pasted%20image%2020250407155809.png](images/Pasted%20image%2020250407155809.png)
 
 حتة انه modified بالاحمر دي يعني الfile اللي عندي فالWorking tree على الOS لا بيساوي اللي فالindex ولا بيساوي اللي موجود فالgit repo.
 الline أللي زودته ده مش موجود فالstaging area ولا موجود فالgit repo.
@@ -523,11 +530,14 @@ ____________________________________________________________
 لو عملت `git log` عشان اشوف الدنيا ماشيه ازاي والcommits بتاعتي هلاقي عندي 2commit object وهتلاقي ان list الcommits فالlog مترتبه descending من الاخر للأول, اول واحد اتعمل يبقى اخر واحد خالص واحدث واحد يبقى اول واحد.
 ![Pasted%20image%2020250407161145.png](images/Pasted%20image%2020250407161145.png)
 
-نبص على الobjects اللي موجوده عندي كلها بعد ماعملت commit كمان ![Pasted%20image%2020250407161319.png](images/Pasted%20image%2020250407161319.png)
+
+نبص على الobjects اللي موجوده عندي كلها بعد ماعملت commit كمان 
+![Pasted%20image%2020250407161319.png](images/Pasted%20image%2020250407161319.png)
 
 كله سايح ف بعضه, تخيل بقى عندك 5او6 commits, ف كان لازم يبقى فيه حاجه توريني انهي objects من دول Related مع بعض واتعملوا Commit واحده. 
 
-نشوف المحتوى بتاع الcommit دي ونشوف الblobs وكل اللي موجود ![Pasted%20image%2020250407161808.png](images/Pasted%20image%2020250407161808.png)
+نشوف المحتوى بتاع الcommit دي ونشوف الblobs وكل اللي موجود 
+![Pasted%20image%2020250407161808.png](images/Pasted%20image%2020250407161808.png)
 
 ايه ال
 parent ده. ده جديد مكنش موجود فال commit اللي قبل  دي
@@ -544,7 +554,9 @@ parent ده. ده جديد مكنش موجود فال commit اللي قبل  د
 ![Pasted%20image%2020250407165316.png](images/Pasted%20image%2020250407165316.png)
 الاسهم بتشاور لورا عشان تشاور على الparent وده عكس التسلسل الزمني. هي تسلسل فالاحداث والتغييرات.
 ف من جوه الcommit اقدر اعرف مين الparent بتاعه, مين هي الcommit اللي حصل عليها التغير و اتحولت الى الcommit الحاليه. ودي الطريقه اللي بtrack بيها الhistory.
-اول commit خالص ملهاش parent واسمها ال`root commit`.![Pasted%20image%2020250407170003.png](images/Pasted%20image%2020250407170003.png) الشكل ال linear ده, that's what is called `branch`.
+اول commit خالص ملهاش parent واسمها ال`root commit`
+.![Pasted%20image%2020250407170003.png](images/Pasted%20image%2020250407170003.png)
+الشكل ال linear ده, that's what is called `branch`.
 اذاً الbrach هو تسلسل linear ل commits.او مجموعه من الcommits كل واحد بيشاور على الparent بتاعه.
 
 الbranch ده by default اسمه `master`, ممكن اغيره عادي.
@@ -564,28 +576,37 @@ ________________________________________________________________________________
 لو زودت line فالfile, وعملت `git status -s` هيقولي الfile ده `M` بالاحمر.
 عشان اشوف الmodifications والفروق بين النسخه اللي عندي فالworking tree واللي فالindex او اللي فالrepo.
 في command اسمه `git diff` بيوريني الفروق بين الthree-trees الworking والrepo والstaging لكل الfiles اللي فالproject بتاعي. 
-بيديني list بكل الفروق في كل الFiles و الfolders أللي فالproject. ![Pasted%20image%2020250407224024.png](images/Pasted%20image%2020250407224024.png) هنا مثلا بيقولي في line اتضاق ملونه بالاخضر وعامل جمبه `+`. و بيعمل `-` للأسطر اللي اتمسحت.
+بيديني list بكل الفروق في كل الFiles و الfolders أللي فالproject. 
+![Pasted%20image%2020250407224024.png](images/Pasted%20image%2020250407224024.png)
+هنا مثلا بيقولي في line اتضاق ملونه بالاخضر وعامل جمبه `+`. و بيعمل `-` للأسطر اللي اتمسحت.
  
 هعمل الstep اللي بعد كده `git add` كده اللي عندي فالWorking tree هو هو اللي فالindex.
-اجرب `git diff` تاني,![Pasted%20image%2020250408012350.png](images/Pasted%20image%2020250408012350.png)
+اجرب `git diff` تاني,
+![Pasted%20image%2020250408012350.png](images/Pasted%20image%2020250408012350.png)
 
 مطلعش حاجه!!
 وده لأن `git diff` بتوريني الفرق بين الstaging area والworking tree, ف انا عملتله staging ب `git add`
 فأصبح انهم بقوا نفس الversion.
 طب لو عايز اشوف الفرق بين اللي فالRepo واللي فالindex. هستعمل برضو `git diff`,   بس اي operation بين الrepo والstaging area `index` لازم مع `git diff` نستخدم الoption `--staged`.
-و  `staged--` معناها git command بين الrepo والindex. مالوش علاقه بالworking tree.![Pasted%20image%2020250408013112.png](images/Pasted%20image%2020250408013112.png)
+و  `staged--` معناها git command بين الrepo والindex. مالوش علاقه بالworking tree.
+![Pasted%20image%2020250408013112.png](images/Pasted%20image%2020250408013112.png)
 
 وهو كان اصلا نفس الفرق بين الindex والworking tree قبل ما اعمل `git add`.
 
 الStep بعد كده اعمل commit.
 بمناسبه `git commit` افرض مش عاجبني الحته اللي بكتب فيها الcommit message, ف من ضمن الConfiguration أللي ممكن اعملها في git اني أconfigure editor بحيث لما اعمل `git commit` مكتبش الmessage فالline يفتحلي editor اكتب فيه.
 ![Pasted%20image%2020250408014257.png](images/Pasted%20image%2020250408014257.png)
+
 هكتب بس git commit هيفتحلي على طول الeditor.
 ![Pasted%20image%2020250408014344.png](images/Pasted%20image%2020250408014344.png)
+
 بعد الsubject لو عايز ازد ممكن انزل line اضيف description بس حاول مايزيدش عن 70 characters.
 ![Pasted%20image%2020250408014623.png](images/Pasted%20image%2020250408014623.png) 
+
 و أsave عادي زي اي editor.
-وهاشوف الsubject والdescription عادي لما اعمل `git log`![Pasted%20image%2020250408014807.png](images/Pasted%20image%2020250408014807.png)
+وهاشوف الsubject والdescription عادي لما اعمل `git log`
+![Pasted%20image%2020250408014807.png](images/Pasted%20image%2020250408014807.png)
+
 ترويشه على `git log`
 1- <mark>**--oneline**</mark>
 ![Pasted%20image%2020250408014910.png](images/Pasted%20image%2020250408014910.png)
@@ -600,8 +621,10 @@ ________________________________________________________________________________
 بحيث لما يكون عندي عدد commits كتير جدا اقدر أfilter اللي انا عايزه بس, مثلا انا شغال في الحاجات اللي ليها علاقه بالdatabase او json files بس. ماليش دعوه بالباقي مثلا 
 
 2- <mark>**-n**</mark>
-بحيث اقوله عايز اخر كام `n` دول بس.![Pasted%20image%2020250411210734.png](images/Pasted%20image%2020250411210734.png)   ولو عايز الcommits بتاعة حد معين 
-   و اقدر اقوله عايز الcommits اللي على branch معين.
+بحيث اقوله عايز اخر كام `n` دول بس.
+![Pasted%20image%2020250411210734.png](images/Pasted%20image%2020250411210734.png) 
+ولو عايز الcommits بتاعة حد معين 
+ و اقدر اقوله عايز الcommits اللي على branch معين.
    
 >**Variations**:
 > Add options like `-p` for diffs `--oneline` for summaries, or `--all` to include all branches if needed.
@@ -610,8 +633,11 @@ ________________________________________________________________________________
 
 لو عايز اشوف كل الbranches اللي عندي ممكن استخدم الcommand `git branch` ممكن استخدم معاها option `-a` عشان يعرض كله حتى الremote.
 ![Pasted%20image%2020250411212345.png](images/Pasted%20image%2020250411212345.png)
+
 ________________________________________________________________________________
-ممكن اعمل graph لما استخدم `graph--` ![Pasted%20image%2020250411212718.png](images/Pasted%20image%2020250411212718.png)
+ممكن اعمل graph لما استخدم `graph--`
+![Pasted%20image%2020250411212718.png](images/Pasted%20image%2020250411212718.png)
+
 ________________________________________________________________________________
 احنا شوفنا الفروق او الmodifications ب`git diff`, ازاي اقدر اقوله يوريني وريني الحاجه اللي جوه وشكل الcommit بدل ما انا بدني الف على commit ثم الroot الroot tree لحد ما اوصل للblobs والTrees.
 مفيش طريقه اشيك تعمل لي هي الtraverse ده. 
@@ -631,15 +657,21 @@ ________________________________________________________________________________
 مش معنى اني مسحته خلاص لا, ان اهم مزايا git أن مفيش بتتمسح لو مسحت حاجه مش هيتشال وخلاص ده هيتكتب انك مسحت الline ده.
  لو جيت مسحت File سواء بgit command او من الoperating system لازم اعمله staging و commit.
   ![Pasted%20image%2020250412005538.png](images/Pasted%20image%2020250412005538.png)
+  
 ## moving or rename files 
-احياناُ git بيهيس لما اعمل Rename او move من الOS, فالاحسن ان انا اعمل كده ب`git mv` ![Pasted%20image%2020250412014334.png](images/Pasted%20image%2020250412014334.png)
+احياناُ git بيهيس لما اعمل Rename او move من الOS, فالاحسن ان انا اعمل كده ب`git mv`
+![Pasted%20image%2020250412014334.png](images/Pasted%20image%2020250412014334.png)
+
 ## viewing the commit history 
 ![Pasted%20image%2020250412014440.png](images/Pasted%20image%2020250412014440.png)
+
   [^2]: commit contains a pointer to a single **tree object**, referred to as the root tree. This tree represents the top-level directory of the project at the time of the commit. The root tree recursively references other tree objects (for subdirectories) and **blob objects** (for file contents), thereby providing a `complete hierarchical representation of the project's state`.
 
 # Undoing things
 
-لو عايز أ delete الrepo بسهوله خالص,هعمل delete الfolder بتاع الrepo.![Pasted%20image%2020250412021856.png](images/Pasted%20image%2020250412021856.png) كده خلاص مبقاش في repo, نبتدي على نضافه بقى.
+لو عايز أ delete الrepo بسهوله خالص,هعمل delete الfolder بتاع الrepo.
+![Pasted%20image%2020250412021856.png](images/Pasted%20image%2020250412021856.png) 
+كده خلاص مبقاش في repo, نبتدي على نضافه بقى.
 نعمل `git init` و `git add` لو جيت بعد كده عملت `git status` هلاقيه بيقولي لو عايز تعمل unstage عشان ت untrack اعمل `<git rm --cached <file`
 وهي بتشيل الملف من الـ Staging Area والـ Repository (يعني تخلّيه untracked) بس تبقّيه موجود في الـ Working Directory.
 ![Pasted%20image%2020250412022344.png](images/Pasted%20image%2020250412022344.png)
@@ -650,11 +682,14 @@ ________________________________________________________________________________
 
 لو رجعت عملت تعديلات تاني بس المره دي عملت `git add` فأصبح ان اللي فالindex هو هو اللي فالworking tree بس مش هو اللي فالrepo, ف `git restore` هنا متنفعش لأني هاrestore منين ما الindex هو هو الworking tree. طب ايه الحل؟
 
-لو جربت اعمل `git status`![Pasted%20image%2020250412075829.png](images/Pasted%20image%2020250412075829.png)
+لو جربت اعمل `git status`
+![Pasted%20image%2020250412075829.png](images/Pasted%20image%2020250412075829.png)
+
 مديني برضو option ازاي اعمل `unstage`, انا عملتله staging ب `git add` ف عشان اعمله unstage بيقول استخدم `stage--` مع `git restore`
 لو عملت `git restore --staged file.txt` هيحصل ان الfile هيتحول من staged الى unstaged بس التعديلات زي ماهي وعشان أ discard اعمل `git restore` بس.
 ________________________________________________________________________________
 ![Pasted%20image%2020250412081125.png](images/Pasted%20image%2020250412081125.png)
+
 عشان اعمل `git add` و `git commit` في نفس الوقت.
 الoption `-a` بيضيف التعديلات على الملفات اللي **tracked** بس، يعني:
 الملفات اللي عدّلتها أو مسحتها وكانت موجودة في الـ Repository. لكن الملفات الجديدة (new files) اللي لسه **untracked** (ما عملتهاش git add قبل كده) مش هتتضاف تلقائيً
@@ -666,6 +701,7 @@ ________________________________________________________________________________
 في الغالب اللي بحتاجه هو اني أتنقل بين الVersions, مثلا عايز ارجع لversion قديم سواء Roll back او roll forward, اعمل  ده ازاي؟
 نبدأ بالHEAD 
 ![Pasted%20image%2020250412084451.png](images/Pasted%20image%2020250412084451.png)
+
 ده الوضع دلوقتي 
 الHEAD بيشاور على الcommit object اللي انا شايفه قدامي فالworking treeو بيشاور على انهي branch, مش موجود عندي غير واحد دلوقتي وهو الmaster.
 
@@ -675,7 +711,8 @@ ________________________________________________________________________________
 مثلا لو نقلت الHEAD على C3 هلاقي الfile عندي فالworking tree اصبح في نفس الstate بتاعة الfile بعد ماعملت الCommit التالته. 
 اذا هي الطريقه ببساطه ان انا احرك الHEAD ده.
 
-الarchitecture دلوقتي ![Pasted%20image%2020250412085833.png](images/Pasted%20image%2020250412085833.png)
+الarchitecture دلوقتي
+![Pasted%20image%2020250412085833.png](images/Pasted%20image%2020250412085833.png)
 لما اجي احرك الhead من الcommit الحاليه مثلا ل الcommit C3, في عندي اختيار من اتنين 
 1-ممكن بعد ما انقل الHEAD اخليه يسمَّع فالworking tree.
 2-وممكن اخليه يسمَّع فالstaging بس.
@@ -683,13 +720,17 @@ ________________________________________________________________________________
 ف من الاحسن لما احاول ارجع لcommit قديم, اني ارجعه في الstaging الاول, حتى ياعم اشوف الdifferences لأني هكون اقدر اقوله `git diff`. واقرر اقول اه او لا.
 وبعدين من الstaging ارجعه ل الworking tree, اعمله `unstage`. وبعدين أdiscard الmodifications.
 
-او او متأكد يبقى مره واحده وخلاص اجيبه من الrepo على طول على الworking tree.![Pasted%20image%2020250412090951.png](images/Pasted%20image%2020250412090951.png)
+او او متأكد يبقى مره واحده وخلاص اجيبه من الrepo على طول على الworking tree.
+![Pasted%20image%2020250412090951.png](images/Pasted%20image%2020250412090951.png)
+
 فالحالتين هستعمل Command اسمه `git reset HEAD`, معناه اني بحرك الHEAD. لوحدها كده بتوديه على الstaging area.
 لو عايزه ي reflect على طول على الworking tree هديله option `--hard` بيعدل physically فالworking tree.
 اذا `git reset` هي دي الطريقه اللي بنقدر نعملها بيها undoing بعد ما نعمل `git commit` وعملت commit و version جديد.
 ________________________________________________________________________________
 ![Pasted%20image%2020250412092628.png](images/Pasted%20image%2020250412092628.png)
-الHEAd ده عباره عن file جواه Pointer بيشاور على `SHA1`. لو روحت ل `git.` وعملت ls هلاقي في file اسمه `HEAD`.![Pasted%20image%2020250412092822.png](images/Pasted%20image%2020250412092822.png)
+
+الHEAd ده عباره عن file جواه Pointer بيشاور على `SHA1`. لو روحت ل `git.` وعملت ls هلاقي في file اسمه `HEAD`
+.![Pasted%20image%2020250412092822.png](images/Pasted%20image%2020250412092822.png)
 
 هلاقي جواه زي لينك كده 
 ![Pasted%20image%2020250412092938.png](images/Pasted%20image%2020250412092938.png)
@@ -699,25 +740,32 @@ ________________________________________________________________________________
 لو عايز بقى انقل الHEAD وارجع revision 
 لو عايز ارجع commit واحده ل ورا, هستعمل الanotation ده `1~` يعني خطوه ل ورا. لو عايز ارجع 2revisions هاقوله `2~` وهكذا.
 
-ممكن مثلا لو عايز اقارن بين الHEAD واي commit تانيه بس انا مش عارف الSHA1 بتاع الHEAD.![Pasted%20image%2020250412094728.png](images/Pasted%20image%2020250412094728.png)
+ممكن مثلا لو عايز اقارن بين الHEAD واي commit تانيه بس انا مش عارف الSHA1 بتاع الHEAD.
+![Pasted%20image%2020250412094728.png](images/Pasted%20image%2020250412094728.png)
 
 المفروض لو رجعت للcommit دي ال2lines الفرق دول هيتشالوا.
 ![Pasted%20image%2020250412095739.png](images/Pasted%20image%2020250412095739.png)
+
 رجعت commit ل ورا, بس الlog بقى فيها 3commits بس, هل ده معناه ان الرابعه اتمسحت؟ لا الobject موجود.
 طب انا ندمان وحزنان في حاجه تخليني أ roll forward, هي basically مسمهاش roll forward في git اسمها `fast forward`. ف اقدر اعمل fast forward عادي.
 
 لكن قبل ده نشوف `git reflog`, كونك اتحركت بالHEAD دي operation انت عملتها المفرةض تبقى logged لكن مش object ف عشان كده مش هاتعرف تشوفها ب`git log`, بس تقدر تشوفها ب`git reflog`
-و reflog هي short for `refrences log`, فهي بتوريني الlog بتاع الrefrences, الRefrences هنا زي ال`SHA1` كده.![Pasted%20image%2020250412102139.png](images/Pasted%20image%2020250412102139.png)
+و reflog هي short for `refrences log`, فهي بتوريني الlog بتاع الrefrences, الRefrences هنا زي ال`SHA1` كده.
+![Pasted%20image%2020250412102139.png](images/Pasted%20image%2020250412102139.png)
 
 كل حاجه معروفه و مرصوده 
 
 طب اعمل fast forward ازاي؟ برضو بنفس الCommand `git reset head` هو اللي هيفسحنا يروح يمين وشمال او ي replay نفس الcommit عادي جداً. طب `~` بترجعني ورا,  فهنستعمل الannotation ده `{n}@`.
 
-الobject 3c183d4 اختفى من git log, ممكن اتأكد انه موجود عن طريق `git show`![Pasted%20image%2020250412133745.png](images/Pasted%20image%2020250412133745.png)
+الobject 3c183d4 اختفى من git log, ممكن اتأكد انه موجود عن طريق `git show`
+![Pasted%20image%2020250412133745.png](images/Pasted%20image%2020250412133745.png)
+
 لو عايز ارجع تاني مش هسنخدم `1~` بقى هشوف الrefrence بتاع اللي عايزه فين مثلا هنا الForth line added, هلاقي جمبه `{1}@` فهستخدم دي.
 ![Pasted%20image%2020250412134006.png](images/Pasted%20image%2020250412134006.png)
 
-واقدر اشوف النتيجه من `git log` وايه اللي حصل من `git reflog`![Pasted%20image%2020250412134247.png](images/Pasted%20image%2020250412134247.png)
+
+واقدر اشوف النتيجه من `git log` وايه اللي حصل من `git reflog`
+![Pasted%20image%2020250412134247.png](images/Pasted%20image%2020250412134247.png)
 ![Pasted%20image%2020250413101226.png](images/Pasted%20image%2020250413101226.png)
 ________________________________________________________________________________
 ![Pasted%20image%2020250413102320.png](images/Pasted%20image%2020250413102320.png)
@@ -784,7 +832,9 @@ stored as full objects in the git objects.
 لو عايز أعمل tagging ل commit معين هستخدم `git tag`
 ![Pasted%20image%2020250413122746.png](images/Pasted%20image%2020250413122746.png)
 
-السهوله وحلاوه الموضوع لو قولتله ![Pasted%20image%2020250413122822.png](images/Pasted%20image%2020250413122822.png)
+
+السهوله وحلاوه الموضوع لو قولتله 
+![Pasted%20image%2020250413122822.png](images/Pasted%20image%2020250413122822.png)
 
 مش هاروح بقى اشوف الcommits وال`SHA1` والmessages عشان اعرف انهي واحده هي, بيخليني انط على طول فالversions. 
 لو تلاحظ الtag ده ليه tagger و Date والmessage لذلك<mark>_هو object_</mark>.
@@ -815,21 +865,24 @@ aliases.
 This technique can also be very useful in creating commands that you think should exist. For
 example, to correct the usability problem you encountered with `unstaging` a file, you can add your
 own `unstage` alias to Git:
-
 ![Pasted%20image%2020250413104647.png](images/Pasted%20image%2020250413104647.png)
+
 _________________________________________________________________________________
 This makes the following two commands equivalent:
 ![Pasted%20image%2020250413104713.png](images/Pasted%20image%2020250413104713.png)
+
 
 ________________________________________________________________________________
 This seems a bit clearer. It’s also common to add a last command, like this:![Pasted%20image%2020250413104823.png](images/Pasted%20image%2020250413104823.png)
 
 This way, you can see the last commit easily:![Pasted%20image%2020250413104856.png](images/Pasted%20image%2020250413104856.png)
+
 _________________________________________________________________________________
 As you can tell, Git simply replaces the new command with whatever you alias it for. 
 However, maybe you want to run an external command, rather than a Git subcommand. In that case, you start the command with a `!` character. This is useful if you write your own tools that work with a
 Git repository. We can demonstrate by aliasing `git visual` to run `gitk`:
 ![Pasted%20image%2020250413105029.png](images/Pasted%20image%2020250413105029.png)
+
 **Summary**
 At this point, you can do all the basic local Git operations — creating or cloning a repository, making
 changes, staging and committing those changes, and viewing the history of all the changes the
@@ -847,13 +900,18 @@ repository has been through. Next, we’ll cover Git’s killer feature: its bra
 ![Pasted%20image%2020250413161803.png](images/Pasted%20image%2020250413161803.png)
 ***___________________________________________________________________________________________***
 ![Pasted%20image%2020250413162043.png](images/Pasted%20image%2020250413162043.png) [^3]
+
 ده الوضع الحالي ل الCommits عندي.
 الbranch هو مجموعه من الCommit objects وبيكونو connected لبعض عن طريق اول parent خالص.
 <mark>_so branch is a linear layout of commits._</mark>
 ![Pasted%20image%2020250413162853.png](images/Pasted%20image%2020250413162853.png)
+
 في اوقات كتير بيحصل اني ببقى عايز اني  اتفرع منه `forking` و اعمل revision تاني و أTest حاجه ازود feature أجرب أو احل issue و فنفس الوقت مش عايز اغير اي حاجه في اخر Commit او revision فالmaster.
-عشان اعمل ده هحتاج اني اعمل Branch جديد هسميه مثلا testing, بعد كده اقدر احول على الtesting اعدل فيه واي تعديل هعمله هيكون مبني على الparent بتاعه اللي خدت منه الbranch.![Pasted%20image%2020250413171903.png](images/Pasted%20image%2020250413171903.png) واي تعديل هعمله ل الcommit هيتعمله revision فالrepo عادي بس هيبقى متعلم انه تبع الbranch اللي اسمه testing بقى.
-خلصت ورجعت لل master عادي اقدر اكمل اعمل commits عادي جدا. ![Pasted%20image%2020250413172244.png](images/Pasted%20image%2020250413172244.png)
+عشان اعمل ده هحتاج اني اعمل Branch جديد هسميه مثلا testing, بعد كده اقدر احول على الtesting اعدل فيه واي تعديل هعمله هيكون مبني على الparent بتاعه اللي خدت منه الbranch.
+![Pasted%20image%2020250413171903.png](images/Pasted%20image%2020250413171903.png)
+واي تعديل هعمله ل الcommit هيتعمله revision فالrepo عادي بس هيبقى متعلم انه تبع الbranch اللي اسمه testing بقى.
+خلصت ورجعت لل master عادي اقدر اكمل اعمل commits عادي جدا. 
+![Pasted%20image%2020250413172244.png](images/Pasted%20image%2020250413172244.png)
 
 ده بيخلي الdevelopment بتاعي `non-linear`, كل branch لوحده هو linear بس لما اعمل اكتر من branch وكذا تفريعه واعدل فيهم فأصبح **non-linear development**.
 >[!important]
@@ -969,59 +1027,81 @@ Rebasing is the process of moving or combining a sequence of commits to a new ba
 
 **working with remotes Architecture**
 ![Pasted%20image%2020250427002711.png](images/Pasted%20image%2020250427002711.png)
+
 لما اعمل Clone لأول مره ل الremote repo ده. هيبقى عندي نسخه طبقه الاصل من الrepo وقت ما عملت clone. بالbranches والcommits كل حاجه حتى نفس ال `SHA1` و نفس الrefernces بتاعهم. 
 `identical copy`.
 بعد كده يأما اعمل push للmodifications او الupdates بتاعتي او اعمل pull ل الupdates ` Synchronize` ب fetch او pull.
 ![Pasted%20image%2020250427003106.png](images/Pasted%20image%2020250427003106.png)
 ___________________
 
-اقدر أconnect على اكتر من remote.  ![Pasted%20image%2020250427003259.png](images/Pasted%20image%2020250427003259.png)
+اقدر أconnect على اكتر من remote. 
+![Pasted%20image%2020250427003259.png](images/Pasted%20image%2020250427003259.png)
 
 مثلا في اكتر من شخص على مستوى العالم شغلاين على نفس الrepo وكل واحد عنده النسخه بتاعته بيعدل فيها فأقدر اخد دايما الupdates او أpush التعديلات بتاعتي.
 to deal with remotes we can use `git remote`.
 ف typically بنعمل الكلام ده على `hosting service`, مثلا repo موجود على hosting service زي git-lab او git-hub مثلا.
 
-عشان اعلم cloning هستخدم `git clone` واديله الlocation بتاع الrepo دي. هو تلقائي بيدي الlocal repo  نفس الاسم بتاع الremote لو لسبب ما كنت عايز اغير الاسم بتاع الlocal repo عندي هاكتب الاسم اللي انا عايزه بعد الlocation.![Pasted%20image%2020250427004919.png](images/Pasted%20image%2020250427004919.png)
-عشان اشوف كل الreomte repos اللي عندي هستخدم `git remote`. ![Pasted%20image%2020250427005439.png](images/Pasted%20image%2020250427005439.png)
+عشان اعلم cloning هستخدم `git clone` واديله الlocation بتاع الrepo دي. هو تلقائي بيدي الlocal repo  نفس الاسم بتاع الremote لو لسبب ما كنت عايز اغير الاسم بتاع الlocal repo عندي هاكتب الاسم اللي انا عايزه بعد الlocation.
+![Pasted%20image%2020250427004919.png](images/Pasted%20image%2020250427004919.png)
+
+عشان اشوف كل الreomte repos اللي عندي هستخدم `git remote`.
+![Pasted%20image%2020250427005439.png](images/Pasted%20image%2020250427005439.png)
 
 ال<mark>_origin_</mark> ده اسمه الshort name. لما اشوف origin دي كده ده معناه ان الrepo أللي شغال عليه ده متاخد من remote repo. 
 الorigin ده  اسمه الshort name او ال`alias` بتاع الremote repo. لو عايز اعرف details عن الremote repo ده.  
-هستخدم `git remote -v` ![Pasted%20image%2020250427010213.png](images/Pasted%20image%2020250427010213.png)
+هستخدم `git remote -v`
+![Pasted%20image%2020250427010213.png](images/Pasted%20image%2020250427010213.png)
 
 هلاقي فيه اتنين origin والorigin دي زي alias كده عن الURL بدل ما كل مره  هكتب الURL كله.
 في السطرين دول بيقولي انه فالrepo ده اقدر اعمل حاجتين اقدر اعمل fetch و push.
 
 لو جيت عدلت فالRemote وعملت Commit والدنيا تمام. 
-ده الremote![Pasted%20image%2020250427040606.png](images/Pasted%20image%2020250427040606.png)
-وده الlocal![Pasted%20image%2020250427040609.png](images/Pasted%20image%2020250427040609.png)
+ده الremote:
+![Pasted%20image%2020250427040606.png](images/Pasted%20image%2020250427040606.png)
 
-هاجي اشوف ده فالlocal مثلا اجرب `git status` مش هيحس بيه ![Pasted%20image%2020250427033103.png](images/Pasted%20image%2020250427033103.png)
+وده الlocal:
+![Pasted%20image%2020250427040609.png](images/Pasted%20image%2020250427040609.png)
+
+هاجي اشوف ده فالlocal مثلا اجرب `git status` مش هيحس بيه 
+![Pasted%20image%2020250427033103.png](images/Pasted%20image%2020250427033103.png)
 
 وده مش صح. ازاي انا up to date مع الremote.
 لكن ده طبيعي لأنك لسه مجبتش الupdates اللي حصلت فالremote. هي دي اخر حاجه يعرفها الlocal repo انك up to date.
 
-ف by the way, عشان اعرف الbranches اللي جايه من الremote. هنستخدم `git branch -r`.![Pasted%20image%2020250427033502.png](images/Pasted%20image%2020250427033502.png)
+ف by the way, عشان اعرف الbranches اللي جايه من الremote. هنستخدم `git branch -r`.
+![Pasted%20image%2020250427033502.png](images/Pasted%20image%2020250427033502.png)
+
 لو انا عايز اضيف اكتر من remote, هنستخدم `<git remote add <short> <URL`.
 
 عشان اجيب و اعرف التغيرات  اللي حصلت فالremote repo من اخر مره عملت Cloning,  عشان اعمل ده في طريقه من 2.
-
 الطبيعي اني بعمل `<اسم الريبو> git fetch`  اللي بيعمله هو انه بيجيب كل الobjects وال References وكل الحاجات أللي اتغيرت من الremote ل الlocal repo بتاعي.
 ![Pasted%20image%2020250427034650.png](images/Pasted%20image%2020250427034650.png)
+
 بعد `git fetch` هو عرف ان  في commit جديده اتعملت فالremote بس ليه مطبهاش فالWorking tree عندي فالlocal repo.
-حتى لما عملت cat-file عندي فالlocal Repo ل الrevision اللي اتضاف فالremote repo لاقيته موجود.![Pasted%20image%2020250427035757.png](images/Pasted%20image%2020250427035757.png)
+حتى لما عملت cat-file عندي فالlocal Repo ل الrevision اللي اتضاف فالremote repo لاقيته موجود.
+![Pasted%20image%2020250427035757.png](images/Pasted%20image%2020250427035757.png)
 
 اللي بيحصل ان `git fetch` بتعمل download لكل الupdates والrevisions ألمختلفه عن الlocal لكن مبتعملهاش `merge` مع الlocal repo والworking tree عندي.
 بحيث يبقى في Work flow حتى اعمل `git show` واشوف ايه الدنيا. لو تمام خلاص اعمل `git merge`. 
 
-ف by the way لو جربت اعمل `git status` بعد ما عرف updates لما عملت `git fetch` هلاقيه جابلي الرساله التمام.![Pasted%20image%2020250427040353.png](images/Pasted%20image%2020250427040353.png)
-لما اعمل `git merge` هيعمل update ل الworking tree.![Pasted%20image%2020250427041027.png](images/Pasted%20image%2020250427041027.png)
-و git status خلاص مفيش حاجه انت up to date وتمام.![Pasted%20image%2020250427041327.png](images/Pasted%20image%2020250427041327.png)
-طب لو جربت اعمل تعديل فالlocal. ألlocal repo عارف كل حاجه, هيقولك انت اللي متقدم Commit عن الremote.![Pasted%20image%2020250427041522.png](images/Pasted%20image%2020250427041522.png)
+ف by the way لو جربت اعمل `git status` بعد ما عرف updates لما عملت `git fetch` هلاقيه جابلي الرساله التمام.
+![Pasted%20image%2020250427040353.png](images/Pasted%20image%2020250427040353.png)
+
+لما اعمل `git merge` هيعمل update ل الworking tree.
+![Pasted%20image%2020250427041027.png](images/Pasted%20image%2020250427041027.png)
+
+و git status خلاص مفيش حاجه انت up to date وتمام.
+![Pasted%20image%2020250427041327.png](images/Pasted%20image%2020250427041327.png)
+
+طب لو جربت اعمل تعديل فالlocal. ألlocal repo عارف كل حاجه, هيقولك انت اللي متقدم Commit عن الremote.
+![Pasted%20image%2020250427041522.png](images/Pasted%20image%2020250427041522.png)
 ![Pasted%20image%2020250427041646.png](images/Pasted%20image%2020250427041646.png)
 هنا الCommit التانيه دي هي اخر حاجه git عارف انها تبع الorigin و عليها الorigin/head والorigin/master.
 و الHEAD على local branch, تعرف انه local لما متلاقيش جمبه `origin` دي. 
 
-حتى اهو الremote معندوش غير 2commits ![Pasted%20image%2020250427042340.png](images/Pasted%20image%2020250427042340.png)
+حتى اهو الremote معندوش غير 2commits
+![Pasted%20image%2020250427042340.png](images/Pasted%20image%2020250427042340.png)
+
 بعد كده خطوه ال`git push`. 
 
  **typical work flow.**
@@ -1031,14 +1111,16 @@ to deal with remotes we can use `git remote`.
   <mark>اغلب الremote repos بتبقى لمجرد الdevelopment ف ملهاش working tree من الاساس.</mark>
 __________
 
-لو جيت عملت branch في الLocal وعملتله switch  ثم عملتله commit.![Pasted%20image%2020250427045351.png](images/Pasted%20image%2020250427045351.png)
+لو جيت عملت branch في الLocal وعملتله switch  ثم عملتله commit.
+![Pasted%20image%2020250427045351.png](images/Pasted%20image%2020250427045351.png)
 
 هلاقي ان Git مش شايف ومش فاهم ايه علاقه branch feature بالremote. 
 هو basically, مفيش اي branch زيه او قصاده فالRrmote عشان يقدر يقارن بينهم, git مش tracking اي feature branch في الremote.
 لما تيجي تعمل `git status` بيقارن الlocal branch بالtracked remote branch اللي قصاده.
 
 كده عندي branch كامل مش موجود فالRemote. ف هعمل بقى <mark>up stream</mark> عن طريق
-`<اسم البرانش> git push`. <اسم البرانش> اللي ه push عليه.![Pasted%20image%2020250427123638.png](images/Pasted%20image%2020250427123638.png)
+`<اسم البرانش> git push`. <اسم البرانش> اللي ه push عليه.
+![Pasted%20image%2020250427123638.png](images/Pasted%20image%2020250427123638.png)
 
 جابلي الerror ده `the current branch feature has no upstream branch.`.
 اللي هو الbranch feature اللي بتقولي اعمله push ده اعمله push على ايه.  مفيش قصاده branch تاني عشان يعمل معاه synchronization. 
@@ -1048,9 +1130,11 @@ __________
 ف هعمل ده مره واحده لأن الbranch كله مش موجود فالremote.
 <mark>__--set-upstream__</mark> = <mark>_-u_</mark>.
 so we can type `git push -u origin feature`
-بقوله وانت بتpush اعمل branch اسمه feature فالorigin. اذا الcommand ده هيعمل feature branch وي synchronize الupdates بتاعته.![Pasted%20image%2020250427125047.png](images/Pasted%20image%2020250427125047.png)
+بقوله وانت بتpush اعمل branch اسمه feature فالorigin. اذا الcommand ده هيعمل feature branch وي synchronize الupdates بتاعته.
+![Pasted%20image%2020250427125047.png](images/Pasted%20image%2020250427125047.png)
 
 ![Pasted%20image%2020250427125013.png](images/Pasted%20image%2020250427125013.png)
+
 واتأكد من ده لما اعمل `git branch` فالremote.
 ![Pasted%20image%2020250427125202.png](images/Pasted%20image%2020250427125202.png)
 
@@ -1078,8 +1162,11 @@ so we can type `git push -u origin feature`
 اكنه مكان انا ب host فيه الremote repos بتاعتي.
 في حاجات تقدر تعملها على git ماقدرش تعملها على git hub والعكس صحيح.
 
-عشان أclone repo من GitHub ![Pasted%20image%2020250427143550.png](images/Pasted%20image%2020250427143550.png)
-لو نزلت الzip file هاتروح تعمله extract عادي لو فتحته من الterminal هتلاقي في hidden directory اسمه `github.` ![Pasted%20image%2020250427143849.png](images/Pasted%20image%2020250427143849.png)
+عشان أclone repo من GitHub
+![Pasted%20image%2020250427143550.png](images/Pasted%20image%2020250427143550.png)
+
+لو نزلت الzip file هاتروح تعمله extract عادي لو فتحته من الterminal هتلاقي في hidden directory اسمه `github.`
+![Pasted%20image%2020250427143849.png](images/Pasted%20image%2020250427143849.png)
 
 بس مفيش `git.` الrepo يعني.
 حتى لو فتحت الdirectory ده جوه الVS code كده `. code` هتلاقي انه مش شايف ان هو repo.
@@ -1087,13 +1174,17 @@ so we can type `git push -u origin feature`
 
 لو عايز اعمل clone, هلاقيه مديني الURL بتاعه ف ممكن اعمل `<git clone <URL> <name`
 ![Pasted%20image%2020250427144515.png](images/Pasted%20image%2020250427144515.png)
-ولما اخش الdirectry هلاقيه عرف انه repo ![Pasted%20image%2020250427144548.png](images/Pasted%20image%2020250427144548.png)
+
+ولما اخش الdirectry هلاقيه عرف انه repo
+![Pasted%20image%2020250427144548.png](images/Pasted%20image%2020250427144548.png)
 ________________________________________________
 # Introduction to GitHub
 ممكن نعتبر الgithub زي web hosting ب host عليه الrepos بتاعتي. او أaccess hosted repos من حد تاني.
 هو من الحاجات اللي بتخلي git يحقق فكره انه**distributed version control**. 
 
-ممكن انا اعمل repository عادي عن طريق اني أclick على <mark>__New__</mark>. ![Pasted%20image%2020250427195920.png](images/Pasted%20image%2020250427195920.png)
+ممكن انا اعمل repository عادي عن طريق اني أclick على <mark>__New__</mark>.
+![Pasted%20image%2020250427195920.png](images/Pasted%20image%2020250427195920.png)
+
 وبيكون اسم الrepo او الURL بتاعه عباره عن `owner-name/repository-name`. والrepository-name ده اللي انت بتحطه ف حاول تعمله Unique بالنسبه للaccount بتاعك.
 
 ممكن اضيف `README` file وهو عباره عن markup file. ممكن اضيفه لو عايز اول ما حد يفتح الrepo الاقي زي description موجود جوه الfile وتكون حاجه descriptive تعرفه الRepo ده عباره عن ايه وبيعمل ايه.
@@ -1115,17 +1206,25 @@ ______
 
 اقدر اعدل واعمل كل حاجه.
 ممكن اضيف file عن طريق `Add file`. ممكن أupload file زي ما انا عايز.
-وعلى حسب الextesion اللي هتضيفه ل الfile فGitHub بيrecognise الfile ده.![Pasted%20image%2020250427203301.png](images/Pasted%20image%2020250427203301.png)
+وعلى حسب الextesion اللي هتضيفه ل الfile فGitHub بيrecognise الfile ده.
+![Pasted%20image%2020250427203301.png](images/Pasted%20image%2020250427203301.png)
 و بيقولك اعمل commit وبيقترح عليك الcommit message.
+
 ![Pasted%20image%2020250427203419.png](images/Pasted%20image%2020250427203419.png)
 
-وهلاقي تأثير ده حصل هنا اهو![Pasted%20image%2020250427203505.png](images/Pasted%20image%2020250427203505.png)
+وهلاقي تأثير ده حصل هنا اهو
+![Pasted%20image%2020250427203505.png](images/Pasted%20image%2020250427203505.png)
 
 قالك عندك 2 commits وضاف الfile اهو, وال`SHA1` بتاع الlatest commit.
-لو دوست على Commits هيظهرلي الcommits اللي عندي كده ![Pasted%20image%2020250427203803.png](images/Pasted%20image%2020250427203803.png) لو دوست على ال`SHA1` بتاع اي واحده هايقولي ايه اللي حصل فيها.![Pasted%20image%2020250427203906.png](images/Pasted%20image%2020250427203906.png)
+لو دوست على Commits هيظهرلي الcommits اللي عندي كده
+![Pasted%20image%2020250427203803.png](images/Pasted%20image%2020250427203803.png)
+
+لو دوست على ال`SHA1` بتاع اي واحده هايقولي ايه اللي حصل فيها.
+![Pasted%20image%2020250427203906.png](images/Pasted%20image%2020250427203906.png)
 
 ممكن ابدأ اconverse مع الناس اللي بتشوف الrepo بتاعي. كل واحد يقدر يسيب comment.
-و موجود ده برضو فالissues ![Pasted%20image%2020250427205704.png](images/Pasted%20image%2020250427205704.png)
+و موجود ده برضو فالissues
+![Pasted%20image%2020250427205704.png](images/Pasted%20image%2020250427205704.png)
 
 مثلا يقولي في issue فالحته الفلانيه او الcode بيجيب معايا error مثلا. بعدين هو يقترح عليا حلول او أpass ده ل واحد من الcollaborators عشان يعدل.
 
@@ -1139,23 +1238,33 @@ ______
 
 موجود desktop version ل GitHub لكن ل mac و windows فقط.
 _________
-لو عايز أcreate Branch هاروح عند كلمه `main` و اكتب اسم الbranch ده.![Pasted%20image%2020250427211543.png](images/Pasted%20image%2020250427211543.png)
+لو عايز أcreate Branch هاروح عند كلمه `main` و اكتب اسم الbranch ده.
+![Pasted%20image%2020250427211543.png](images/Pasted%20image%2020250427211543.png)
 
 و أclick على `create branch: feature`.
 الbranch اللي اسمه بيبقى مكان الmain كده هو ده ال<mark>_current branch_</mark>.
 
 ![Pasted%20image%2020250427211825.png](images/Pasted%20image%2020250427211825.png)
-ف انا هنا على الfeature branch واي تعديل هعمله هيبقى committed على ال feature branchده.![Pasted%20image%2020250427212144.png](images/Pasted%20image%2020250427212144.png)
+
+ف انا هنا على الfeature branch واي تعديل هعمله هيبقى committed على ال feature branch ده.
+
+![Pasted%20image%2020250427212144.png](images/Pasted%20image%2020250427212144.png)
 
 بعد ماتعمل الcommit 
 من ضمن الoptions اللي هيديهالك <mark>__Compare & pull request__</mark> ده اللي بيوديني فالاخر ل ال`merge`.
 أ click على __<mark>Compare & pull request</mark>__  
-هلاقيه مقترح الmessage عادي. و بيقولي انها <mark>able to merge</mark> الfeature branch  ده into الmain branch. ف أclick على __<mark>create pull request</mark>__![Pasted%20image%2020250427214249.png](images/Pasted%20image%2020250427214249.png)
-ثم  __<mark>merge pull request</mark>__ ![Pasted%20image%2020250427214628.png](images/Pasted%20image%2020250427214628.png) 
-ثم  اكتبله ال`commit merge message` و أclick على __<mark>confirm merge</mark>__.![Pasted%20image%2020250427214642.png](images/Pasted%20image%2020250427214642.png)
+هلاقيه مقترح الmessage عادي. و بيقولي انها <mark>able to merge</mark> الfeature branch  ده into الmain branch. ف أclick على __<mark>create pull request</mark>__!
+[Pasted%20image%2020250427214249.png](images/Pasted%20image%2020250427214249.png)
+
+ثم __<mark>merge pull request</mark>__
+![Pasted%20image%2020250427214628.png](images/Pasted%20image%2020250427214628.png) 
+
+ثم  اكتبله ال`commit merge message` و أclick على __<mark>confirm merge</mark>__.
+![Pasted%20image%2020250427214642.png](images/Pasted%20image%2020250427214642.png)
 
 وأقدر في كل مره اسيب Comment كده.
-بس كده الmerge خلص خلاص. ![Pasted%20image%2020250427214915.png](images/Pasted%20image%2020250427214915.png)
+بس كده الmerge خلص خلاص. 
+![Pasted%20image%2020250427214915.png](images/Pasted%20image%2020250427214915.png)
 
 ممكن اdelete الbranch عادي لو خلصت اللي انا عايزه.
 ***___________________________________________________________________________________________***
@@ -1166,7 +1275,8 @@ _________
 ف مش منطقي اني اروح كل شويه اعمل add file والحوارات دي.
 
 من الطرق المستخدمه 
-اننا ن<mark>_create empty repo_</mark>. من الحاجات الحلوه في GitHub انه لما بcreate empty repo هو بيعرف انك هت populate الrepo ده من الdown stream ف بيديني شويه options لكل case. ![Pasted%20image%2020250427222347.png](images/Pasted%20image%2020250427222347.png)
+اننا ن<mark>_create empty repo_</mark>. من الحاجات الحلوه في GitHub انه لما بcreate empty repo هو بيعرف انك هت populate الrepo ده من الdown stream ف بيديني شويه options لكل case. !
+[Pasted%20image%2020250427222347.png](images/Pasted%20image%2020250427222347.png)
 
 حتى لو تلاحظ دي مظهرتش قبل كده لما خليناه يadd الREADME file واحنا بنcreate الrepo.
 
@@ -1175,8 +1285,11 @@ _________
 حتى لو الrepo ده مكنش cloned, لو انت عامله from scratch اقدر اعرفله remote, يعني حته لو مش cloned من حاجه اقدر اعرفله upstream او remote.
 
 ف هعمل repo عندي locally واعمل اللي انا عايزه والcommits وكل حاجه. وبعدين اسمع كلام عمه GitHub واكتب `git remote add origin https://github.com/Mikhanagy55/rrepoooo.git`
-اهو ونتأكد وكل حاجه![Pasted%20image%2020250427224956.png](images/Pasted%20image%2020250427224956.png)
-عادي نعمل upstream لو اسامي الbranches مختلفه بس ده مش كويس. ف نسمع كلامه تاني ونغير اسم الmaster ل main![Pasted%20image%2020250427225144.png](images/Pasted%20image%2020250427225144.png)
+اهو ونتأكد وكل حاجه
+![Pasted%20image%2020250427224956.png](images/Pasted%20image%2020250427224956.png)
+
+عادي نعمل upstream لو اسامي الbranches مختلفه بس ده مش كويس. ف نسمع كلامه تاني ونغير اسم الmaster ل main.
+![Pasted%20image%2020250427225144.png](images/Pasted%20image%2020250427225144.png)
 خلاص كله تمام نعمل اخر حاجه بقى اللي هو نعمل push. عن طريق `git push -u origin main`
 
 ![Pasted%20image%2020250427225326.png](images/Pasted%20image%2020250427225326.png)
@@ -1191,13 +1304,16 @@ _________
 حتى هتلاقي ده لما تجرب تpush من الCLI.
 و ده المنطقي والطبيعي هتلاقيه بيقولك اكتبلي username و password.
 ![Pasted%20image%2020250428015802.png](images/Pasted%20image%2020250428015802.png)
+
 كأني عملت authentication على GitHub. حتى هو طالب الusername بتاعة `htts://github.com`. 
 دي واحده من الطرق اللي ممكن أauthenticate بيها.
 
 note 
 ![Pasted%20image%2020250428020226.png](images/Pasted%20image%2020250428020226.png)
+
 لو تلاحظ هتلاقي ان origin ده بيستعمل `https` protocol.  
 لو تفتكر كان واحنا بنعمل الrepo كان في اختيارين `SSH` و `HTTPS` اعرَّف عن طريقهم الremote repo واحنا عرفنا الremote عن طريق ال`https`.
+
 ![Pasted%20image%2020250428020438.png](images/Pasted%20image%2020250428020438.png)
 
 الHTPPS هو اللي فات اللي كنا بنتعامل معاه نكتب الusername والpassword خلاص خلص الauthentication والكلام ده هيخش ال cash memory وكل مره هعمل push مش هيطلبه تاني.
@@ -1210,12 +1326,14 @@ note
 #### SSH 
 ![Pasted%20image%2020250428021418.png](images/Pasted%20image%2020250428021418.png)
 ![Pasted%20image%2020250428021546.png](images/Pasted%20image%2020250428021546.png)
+
 هنستعمل الURL بتاع الSSH ده. وعملنا الshort name بتاع الremote اسمه `ssh-origin`.
 لما اعمل `git remote -v`,  ظهر 2 remotes واحد اسمه origin والURL بتاعه https و ده الprotocol اللي شغال بيه. 
 والتاني اسمه ssh-origin. هو نفس المكان ونفس كل حاجه لكن الprotocol المستعمل مختلف. ده شغال ب `SSH`.
 
 لو جرب اعملت push بالURL بتاع الSSH.
 ![Pasted%20image%2020250428022154.png](images/Pasted%20image%2020250428022154.png)
+
 هو جاب error `permission denied` بس مش هيطلب مني username و password.
 وهي دي الفكره اللي عايزينها. لو هتعمل push وهستعتمل الSSH او هستعمل remote بكَلِمُه بالSSH.
 اذا لازم يبقى فيه الprivate والpublic keys.
@@ -1225,14 +1343,18 @@ note
 ف اللي بيحصل ان GitHub account بيقارن بين الkey اللي متخزن عنده واللي متخزن عندي locally على الmachine. لو الاتنين متطابقين, اذا الراجل ده من حقه يpush ويcontribute على الrepo دي.
 
 so, The next step is to generate an SSH public key and add it to your GitHub account’s SSH settings.
+
 ![Pasted%20image%2020250428023733.png](images/Pasted%20image%2020250428023733.png)
+
 حتى هو بيوريني ازاي اعمل generate ل الkey.
 
-هgenerate ألkey عن طريق الcommand ده![Pasted%20image%2020250428023833.png](images/Pasted%20image%2020250428023833.png)
+هgenerate ألkey عن طريق الcommand ده
+![Pasted%20image%2020250428023833.png](images/Pasted%20image%2020250428023833.png)
 
 لازم تتأكد ان الايميل اللي هتكتبه هنا اللي هو على اساسه هيتعمل الkey, يكون هو نفس الemail اللي انت عملت بيه ال configuration ل الgit repo locally عندي.
 
 ![Pasted%20image%2020250428025816.png](images/Pasted%20image%2020250428025816.png)
+
 هيعمل 2files اهم حاجه بالنسبالنا هي الpublic key file, هناخد الcontent بتاعته copy ونحطها على الGitHub account عشان اقدر اعمل push.
 
 
@@ -1241,7 +1363,8 @@ before adding a new SSH key to the `ssh-agent` to manage your keys, you should h
 ![Pasted%20image%2020250428031416.png](images/Pasted%20image%2020250428031416.png)
 ![Pasted%20image%2020250428031444.png](images/Pasted%20image%2020250428031444.png)
 
-بيقولي تقدر كمان تعمل evaluation تتأكد ان الkey اتعمل صح. ![Pasted%20image%2020250428133037.png](images/Pasted%20image%2020250428133037.png)
+بيقولي تقدر كمان تعمل evaluation تتأكد ان الkey اتعمل صح. 
+![Pasted%20image%2020250428133037.png](images/Pasted%20image%2020250428133037.png)
 
 الPID بيظهر عشان يأكد إن الـ Agent شغال, وتقدر تستخدم الرقم ده لو عايز تتحكم في العملية (مثلاً توقّفها أو تشوفها).
 الـ SSH Agent نفسه بيستخدم الـ PID ده داخليًا عشان يحمل الprivate key (زي id_ed25519) في الmemory، ويوفّرها لما تتصل بسيرفر زي GitHub (مثلاً لما تعمل git push).
@@ -1250,26 +1373,33 @@ before adding a new SSH key to the `ssh-agent` to manage your keys, you should h
 
 بعدين اشوف الcontent بتاع الpublic key 
 ![Pasted%20image%2020250428133856.png](images/Pasted%20image%2020250428133856.png)
+
 وهاخد الcontent كله copy وارجع ل GitHub و اخش على الssh key setting و أclick على <mark>__New SSH Key__</mark>.
-اديله اي اسم ,واحط الkey ![Pasted%20image%2020250428134116.png](images/Pasted%20image%2020250428134116.png)
+اديله اي اسم ,واحط الkey.
+![Pasted%20image%2020250428134116.png](images/Pasted%20image%2020250428134116.png)
 
 وأclick على <mark>__Add SSH key__</mark>.
 
 نعمل push بقى.
 ![Pasted%20image%2020250428134950.png](images/Pasted%20image%2020250428134950.png)
+
 الpush المره دي نجح.
 
-اتأكد برضو لما تلاقي الlocal والremote عندهم نفس الcommits بلا`SHA1` بتاعهم.![Pasted%20image%2020250428140237.png](images/Pasted%20image%2020250428140237.png)
+اتأكد برضو لما تلاقي الlocal والremote عندهم نفس الcommits بلا`SHA1` بتاعهم.
+![Pasted%20image%2020250428140237.png](images/Pasted%20image%2020250428140237.png)
 
 ![Pasted%20image%2020250428140252.png](images/Pasted%20image%2020250428140252.png)
+
 كده الpush successful.
 
 ![Pasted%20image%2020250428140612.png](images/Pasted%20image%2020250428140612.png)
+
 وهنا بيقولك ان تم استعماله بالفعل.
 
 اقدر اخش على الseeting وبتاعه الrepo واعملله delete.
 
 ![Pasted%20image%2020250428030442.png](images/Pasted%20image%2020250428030442.png)
+
 ده هيأكدلك إن GitHub عارف المفتاح بتاعك من غير ما تحتاج تعمل push.
 
 **What is the SSH Agent?**
@@ -1282,18 +1412,24 @@ before adding a new SSH key to the `ssh-agent` to manage your keys, you should h
 نعمل pull والfetch 
 لو جيت على الorigin من GitHub وعلمت file وعملت commit. كده اصبح ان عندي 2file.
 لو جيت على الlocal repo مش هلاقي عندي فالmain branch غير file واحده.
-ف محتاج اني اعمل `fetch` عشان اقدر اشوف التعديلات. ![Pasted%20image%2020250428142718.png](images/Pasted%20image%2020250428142718.png)
+ف محتاج اني اعمل `fetch` عشان اقدر اشوف التعديلات. 
+![Pasted%20image%2020250428142718.png](images/Pasted%20image%2020250428142718.png)
 
-كده عملت fetch لو عملت git log ![Pasted%20image%2020250428143222.png](images/Pasted%20image%2020250428143222.png)
+كده عملت fetch لو عملت git log 
+![Pasted%20image%2020250428143222.png](images/Pasted%20image%2020250428143222.png)
+
 ممكن استخدم `all--` عشان يوريني كل الcommits الموجوده سواء remote او local.
 ![Pasted%20image%2020250428142836.png](images/Pasted%20image%2020250428142836.png)
-هيقولي في واحده ذياده 
 
+هيقولي في واحده ذياده 
 عشان الذياده دي اشوفها عندي فالlocal هعمل `git merge`
 ![Pasted%20image%2020250428143408.png](images/Pasted%20image%2020250428143408.png)
 
-لو عملت git log هلاقي ال4commits الموجوده.![%20Pasted%20image%2020250428143446.png](images/%20Pasted%20image%2020250428143446.png)
-أقدر اpublish من على الVS code ![Pasted%20image%2020250428145326.png](images/Pasted%20image%2020250428145326.png)
+
+لو عملت git log هلاقي ال4commits الموجوده.
+![%20Pasted%20image%2020250428143446.png](images/%20Pasted%20image%2020250428143446.png)
+أقدر اpublish من على الVS code 
+![Pasted%20image%2020250428145326.png](images/Pasted%20image%2020250428145326.png)
 
 ده واحد من الworkflows انه اكون شغال على الrepo بتاعتي انا. الremote على GitHub والlocal على الmachine.
 
@@ -1303,7 +1439,8 @@ before adding a new SSH key to the `ssh-agent` to manage your keys, you should h
 ف ازاي أContribute في repo زي hello world. اذاً هنا الworkflow هيختلف. مش الpush والpull المباشر اصل الrepo ده مش بتاعي.
 اول حاجه هعملها هو اني اعمل `fork` ل الrepo ده. ده معناه اني بعمل copy من الrepo ده من على GitHub ل GitHub account بتاعي. 
 ف هيتعمل repo عندي على الGitHub account بتاعي. هيكون نسخه من ده ويبقى `forked` منه بنفس الاسم والcontent وكل حاجه.
-عشان اعمل fork. هاروح أclick على `fork`![Pasted%20image%2020250428150922.png](images/Pasted%20image%2020250428150922.png)
+عشان اعمل fork. هاروح أclick على `fork`
+![Pasted%20image%2020250428150922.png](images/Pasted%20image%2020250428150922.png)
 
 هتلاحظ ان في 1500 واحد عاملين ل الrepo ده fork.
 
@@ -1311,20 +1448,25 @@ _______
 
 ![Pasted%20image%2020250428151135.png](images/Pasted%20image%2020250428151135.png)
 
+
 وهتلاقي كل settings والcommits وال configuration كلها موجوده عندك.
 
-من ضمن الحاجات اللي اقدر اعملها بعد الfork اني أ`Fetch upstream` او أ`contribute`![Pasted%20image%2020250428151806.png](images/Pasted%20image%2020250428151806.png)
+من ضمن الحاجات اللي اقدر اعملها بعد الfork اني أ`Fetch upstream` او أ`contribute`
+![Pasted%20image%2020250428151806.png](images/Pasted%20image%2020250428151806.png)
+
 طب عايز ابدأ إني أcontribute مع الناس دي, عايز أpush انا كمان.
 عشان اعمل ده بعد ما اعملت الfork. إما انك تعدل في GitHub اعمل add file وكل الكلام ده.   
-او الطبيعي والمنطقي <mark>_اني اعمل cloning من الforked repo بتاعي_</mark> ده.  ![Pasted%20image%2020250428152203.png](images/Pasted%20image%2020250428152203.png)
+او الطبيعي والمنطقي <mark>_اني اعمل cloning من الforked repo بتاعي_</mark> ده. 
+![Pasted%20image%2020250428152203.png](images/Pasted%20image%2020250428152203.png)
 
 ![Pasted%20image%2020250428152232.png](images/Pasted%20image%2020250428152232.png)
 
-ولو عملت `git remote -v`![Pasted%20image%2020250428152356.png](images/Pasted%20image%2020250428152356.png)
+ولو عملت `git remote -v`
+![Pasted%20image%2020250428152356.png](images/Pasted%20image%2020250428152356.png)
 
 هلاقي ان الremote بتاع الrepo ده هو من الaccount بتاعي. مش الoriginal اللي واخد منه الfork.
 
-وممكن اضيف remote تاني اللي هو الشخص اللي واخد منه الfork .
+وممكن اضيف remote تاني اللي هو الشخص اللي واخد منه الfork.
 ![Pasted%20image%2020250428152744.png](images/Pasted%20image%2020250428152744.png)
 
 عشان ابقى قادر اشوف الupdates دايما وابقىup to date مع الrepo الاصلي. واعدلها و أpush التعديلات دي عندي.
@@ -1333,14 +1475,18 @@ _______
 لو عدلت انا فالforked عندي فالLocal ف هعمل push عادي للmodifications أللي عملتها ل الremote forked repo.  ف انا شايف ان الكلام ده مهم وكده عايز اقول ل صاحب الRepo انه يضيف تعديلاتي فهيحصل ده ازاي؟؟
 
 هنا يظهر ييجي مفهوم جديد في `GitHub` اسمه `pull request`.  بطلب منه يعمل pull ل الforked repo بتاعي بعد ما ضفت تعديلاتي. 
-عشان اعمل ده هاروح ل<mark>pull request</mark>![Pasted%20image%2020250428153905.png](images/Pasted%20image%2020250428153905.png) و أclick على <mark>__Create pull request__</mark> 
-ف هيشوف التعديلات اللي انا عدلتها ومش موجوده فالoriginal ![Pasted%20image%2020250428154009.png](images/Pasted%20image%2020250428154009.png)
+عشان اعمل ده هاروح ل<mark>pull request</mark>
+![Pasted%20image%2020250428153905.png](images/Pasted%20image%2020250428153905.png) 
+و أclick على <mark>__Create pull request__</mark> 
+ف هيشوف التعديلات اللي انا عدلتها ومش موجوده فالoriginal
+![Pasted%20image%2020250428154009.png](images/Pasted%20image%2020250428154009.png)
 
 و أclick على <mark>__Create pull request__</mark>
 
 واحط الmessage وابدأ اديله تفاصيل عن اللي عملته, و أclick على <mark>__Create pull request__</mark>.
+عند الراجل هناك بقى هيفتح الpull request هيلاقي في request جايله منahmed sami 
 
-عند الراجل هناك بقى هيفتح الpull request هيلاقي في request جايله منahmed sami ![Pasted%20image%2020250428154309.png](images/Pasted%20image%2020250428154309.png)
+![Pasted%20image%2020250428154309.png](images/Pasted%20image%2020250428154309.png)
 و يا اما يقبله او ي close انه ي ignore يعني.
 ويحط comment 
 ![Pasted%20image%2020250428154601.png](images/Pasted%20image%2020250428154601.png)
@@ -1348,4 +1494,4 @@ _______
 
 من ضمن الحاجات اللي اقدر اعملها على GitHub  انه احط policies و restrictions بحيث مين يقدر يcontribute او يقبل الpull requests في branches معينه. اقدر احدد ده والprotected branches ومين يقبل pull request كل pull request محتاج له كام approval. من الحاجات اللي موجوده في GitHub ومش موجوده في git.
 
-**made by  Mikhail Nagy**
+**made by [Mikhail Nagy](https://www.linkedin.com/in/mikhail-nagy-99620718a)**
