@@ -1,7 +1,9 @@
 ![18133.png](images/18133.png)
+
 **This summary was created by [Mikha](https://www.linkedin.com/in/mikhail-nagy-99620718a).**  
 I hope you find it helpful. Best regards!
-[**Git and GitHub|شخبط وانت متطمن**](https://youtu.be/Q6G-J54vgKc?si=pUTe-RGv4Uvmb18j)
+
+Video link: [**Git and GitHub|شخبط وانت متطمن**](https://youtu.be/Q6G-J54vgKc?si=pUTe-RGv4Uvmb18j)
 
 # Intro to VCs
 كل واحد بيبقى عايز طريقه يtrack بيها الchanges اللي عاملها على ال file بتاعه اياََ كان يعني, يرصد التغيرات اللي حصلت في الstructure بتاعه سواء الfiles, folders, content, etc. ويرصد التغيرات دي مع الوقت ويكون فاهم انه فاليوم الفولاني حصل تغير معين بسبب كذا كذا وهكذا. 
@@ -31,6 +33,7 @@ I hope you find it helpful. Best regards!
 _________________________________________________________________________________
 # History of Git  
 ![Pasted%20image%2020250402161612.png](images/Pasted%20image%2020250402161612.png)
+
 المعلم **Linus Torvalds**  بعد ما عمل <mark>**Linux**</mark> ك open source, ف عايز بقى يحط ال Linux Kernel ده في مكان ما بحيث يكون `shared` والناس كلها ت connect عليه و تعدل كمان وت contribute و يرفع تعديلات. 
 ف لجأ لواحده من الVersion control systems اللي موجودين و اختار واحد من اللي كانو متاحين واللي بيقدم خدمة for free. وكان اسمه **<mark>bit keepers</mark>**
 كان خايف انهم ييجوا في يوم ويقولك مفيش حاجه free.
@@ -81,8 +84,12 @@ _______
 
 حاجه كمان انا مش بس بconnect على الdistributed version اللي على الServer, لا ده انا ممكن أconnect فنفس الوقت ولنفس الproject على واحده تاني او PC تاني. 
 ف كده انا باخد التعديلات من ال Server الاصلي اللي عملت منه الClone ومن واحد تاني شغال على نفس ال Project. ف اشوف التعديلات من ده ومن ده أpush تعديلاتي هنا وهنا.
+
 ![Pasted%20image%2020250402160100.png](images/Pasted%20image%2020250402160100.png)
+
+
 عشان كده اسمه **distributed version control**. حيث انه مش Local ومش Central.
+
 >[!important]
 >**GIT is a Distributed Version Control.**
 
@@ -174,6 +181,7 @@ __________________________________________________________________________
 مبقاش folder بقى object فيه الcontent and metadata.
 
 3-**commit**
+
 4-**Tagged annotation**
 
 ***____________________________________________________________________________________________***
@@ -203,30 +211,38 @@ __________________________________________________________________________
 >The output **F(X)** is a **160-bit** hash value, commonly displayed as a **40-character hexadecimal string** (e.g., a1b2c3d4...). This string serves as a unique identifier for the input data **X** within the Git repository, such as a commit, file, or directory.
  .The specific algorithm used in **Git** is **SHA-1** (`Secure Hash Algorithm 1`), a cryptographic hash function.
 
-بناءاً على الحاجه اللي موجوده في $X$ و الالجوريزم المستخدم في الhash function, الناتج بتاعها بيبقى Unique.
-لكن بشرط انها تبقى Deterministic, يعني نفس ال$X$ بتطلع نفس ال$F(x)$ في كل مره هدخل$X$ على الhash function. 
+بناءاً على الحاجه اللي موجوده في X و الالجوريزم المستخدم في الhash function, الناتج بتاعها بيبقى Unique.
+لكن بشرط انها تبقى Deterministic, يعني نفس الX بتطلع نفس الF(x) في كل مره هدخلX على الhash function. 
 من الhashing Algorithms المشهوره **SHA,MD5** وال SHA في منه SHA1 و SHA256. 
 تذكر ان احنا بنعمل كل ده عشان نخلي كل الobjects في git يبقى ليها Unique ID. 
 
 
 ![Pasted%20image%2020250403130628.png](images/Pasted%20image%2020250403130628.png)
 ال**stdin--** عشان ياخد input من الpipeing.
+
 الcommand اللي بيعمل نفس الكلام ده في Linux اسمه`shasum`.
+
 ![Pasted%20image%2020250403130935.png](images/Pasted%20image%2020250403130935.png)
 
 طب ليه الاختلاف مع ان الاتنين بيستخدموا SHA1؟؟
 زي ما احنا عارفين ان git مش بس بياخد الContent بتاع الObject كمان بياخد الmetadata, اللي بيحصل ان git مش بيشوف `Hello, Git` كده لا ده هو بيزود عليها حاجات  هو بيزود 3 حاجات 
 1- type
+
 2-size
+
 3-null character
+
 ف لما تديله `Hello, Git` مش هياخدها كده اللي هو حته text وخلاص لا هو بيجود من عنده الاول بعد كده ياخد كله على بعضه ويعمل الhash ل الobject ده.  
 ف هو بيشوفها كده 
+
 ![Pasted%20image%2020250403132411.png](images/Pasted%20image%2020250403132411.png) 
+
 
 الtype بعدين ال sizeاللي هو `11` مش 10 عشان في line break فالاخر مش ظاهر بس الterminal بتحطه. ثم null  character بعدين يحط الtext. 
 اي تغير ولو ايه هيفرق لأن الAlgorithm شغال اصلا على ال ASCII وال binary format.
 
 عشان Linux يشوف ال`0\` انه escape character مش مجرد text عادي بنضيف option `-e` على الecho command.
+
 ![Pasted%20image%2020250403133207.png](images/Pasted%20image%2020250403133207.png)
 
 لو جربت ت pass الformat اللي git بيشوفها وبيعملها ل`shasum`  هيطلعلك نفس ال$f(x)$ او نفس الhexadecimal characters.
@@ -408,6 +424,7 @@ ____________________________________________________________________
 
 يعني لو 100 file فالproject هقعد اضيفهم file file ?!!
 اقدر استعمل الregular expressions وال glob patterns بتاع الfile names
+
 ![Pasted%20image%2020250405001108.png](images/Pasted%20image%2020250405001108.png)
 
 أو اقوله ضيفلي كل حاجه موجوده عن طريق `*` او `.`"current directory" .
@@ -623,22 +640,28 @@ ________________________________________________________________________________
  ________________________________________________________________________________
  
 **How can i see the modification?**
+
 لو زودت line فالfile, وعملت `git status -s` هيقولي الfile ده `M` بالاحمر.
 عشان اشوف الmodifications والفروق بين النسخه اللي عندي فالworking tree واللي فالindex او اللي فالrepo.
 في command اسمه `git diff` بيوريني الفروق بين الthree-trees الworking والrepo والstaging لكل الfiles اللي فالproject بتاعي. 
 بيديني list بكل الفروق في كل الFiles و الfolders أللي فالproject.
+
 ![Pasted%20image%2020250407224024.png](images/Pasted%20image%2020250407224024.png)
-هنا مثلا بيقولي في line اتضاق ملونه بالاخضر وعامل جمبه `+`. و بيعمل `-` للأسطر اللي اتمسحت.
+
+هنا مثلا بيقولي في line اتضاف ملونه بالاخضر وعامل جمبه `+`. و بيعمل `-` للأسطر اللي اتمسحت.
  
 هعمل الstep اللي بعد كده `git add` كده اللي عندي فالWorking tree هو هو اللي فالindex.
 اجرب `git diff` تاني,
+
 ![Pasted%20image%2020250408012350.png](images/Pasted%20image%2020250408012350.png)
 
 مطلعش حاجه!!
+
 وده لأن `git diff` بتوريني الفرق بين الstaging area والworking tree, ف انا عملتله staging ب `git add`
 فأصبح انهم بقوا نفس الversion.
 طب لو عايز اشوف الفرق بين اللي فالRepo واللي فالindex. هستعمل برضو `git diff`,   بس اي operation بين الrepo والstaging area `index` لازم مع `git diff` نستخدم الoption `--staged`.
 و  `staged--` معناها git command بين الrepo والindex. مالوش علاقه بالworking tree.
+
 ![Pasted%20image%2020250408013112.png](images/Pasted%20image%2020250408013112.png)
 
 وهو كان اصلا نفس الفرق بين الindex والworking tree قبل ما اعمل `git add`.
@@ -734,7 +757,10 @@ ________________________________________________________________________________
 # Undoing things
 
 لو عايز أ delete الrepo بسهوله خالص,هعمل delete الfolder بتاع الrepo.
-![Pasted%20image%2020250412021856.png](images/Pasted%20image%2020250412021856.png) كده خلاص مبقاش في repo, نبتدي على نضافه بقى.
+![Pasted%20image%2020250412021856.png](images/Pasted%20image%2020250412021856.png)
+
+
+كده خلاص مبقاش في repo, نبتدي على نضافه بقى.
 
 نعمل `git init` و `git add` لو جيت بعد كده عملت `git status` هلاقيه بيقولي لو عايز تعمل unstage عشان ت untrack اعمل `<git rm --cached <file`
 وهي بتشيل الملف من الـ Staging Area والـ Repository (يعني تخلّيه untracked) بس تبقّيه موجود في الـ Working Directory.
@@ -993,9 +1019,12 @@ repository has been through. Next, we’ll cover Git’s killer feature: its bra
 **___________________________________________________________________________________________**
 
 ![Pasted%20image%2020250413162043.png](images/Pasted%20image%2020250413162043.png) [^3]
+
 ده الوضع الحالي ل الCommits عندي.
+
 الbranch هو مجموعه من الCommit objects وبيكونو connected لبعض عن طريق اول parent خالص.
-<mark>_so branch is a linear layout of commits._</mark>
+>[!important]
+>]**so branch is a linear layout of commits.**
 
 ![Pasted%20image%2020250413162853.png](images/Pasted%20image%2020250413162853.png)
 
@@ -1063,10 +1092,13 @@ repository has been through. Next, we’ll cover Git’s killer feature: its bra
 التعدبلات اللي عملتها فالtesting دي لو انا راضي عنها ممكن اعملها `merging`.
 to merge branches we can use `git merge`.
 ![Pasted%20image%2020250426133052.png](images/Pasted%20image%2020250426133052.png)
-
 <mark>__merging testing branch into master branch__</mark>
+
 بعمل الmerge وانا واقف في الbranch اللي هيحصل فيه الmerging.
-___<mark>المعلم git بيختار طريقة الـ merge بناءً على شكل الـ commit history بتاعك.</mark>___
+>[!note]
+>المعلم git بيختار طريقة الـ merge بناءً على شكل الـ commit history بتاعك.
+>
+
 هو بيقول fast forward لأن ده اللي حصل, الmerge هنا عباره عن اني نقلت الmaster والhead خطوه قدام ل الcommit اللي testing بيشاور عليها. عشان كده اسمه fast forward. 
 الfast forward حصل لأن مفيش اي commits زياده فالmaster, بالتالي كلهم على خط واحد, ف هنقل الpointer وخلاص.
 
@@ -1085,6 +1117,7 @@ _______________________________________________________
 اللي بيحصل مثلا اني بعمل branch والعب فيه وفي نفس الوقت انا بعدل  اصلا فالmaster واعمل commits.
 ![Pasted%20image%2020250426174525.png](images/Pasted%20image%2020250426174525.png)
 
+>[!note]
 >that's what is called `Divergent History`.
 
 ![Pasted%20image%2020250426183330.png](images/Pasted%20image%2020250426183330.png)
@@ -1093,9 +1126,11 @@ _______________________________________________________
 
 الmerge هنا اسمه `three-way merge` وده بيعتمد على التلاته دول
 ![Pasted%20image%2020250426183854.png](images/Pasted%20image%2020250426183854.png) 
+
 عشان يعمل الmerge, بيعمل COMMIT جديد revision رابع ولا واحد منهم.
 
 ![Pasted%20image%2020250426184439.png](images/Pasted%20image%2020250426184439.png) 
+
 هعمل بقى merge للtesting into master, فلما اعمل ده هيفتحلي text editor يقولي اكتب message عشان ال`merge commit` بقى.
 
 ف ده اللي هيحصل
@@ -1110,6 +1145,7 @@ _______________________________________________________
 _____________________________________
 لو شوفت الHEAD  
 ![Pasted%20image%2020250426185321.png](images/Pasted%20image%2020250426185321.png) 
+
 هتلاقيه بيقولك انه merge بين الcommits. و هما دول أللي كان بيشاور عليهم ال2branches.
 ________________________________________-
 
@@ -1123,9 +1159,11 @@ ________________________________________-
 - التغييرات من master هتبقى تحت <mark>_<<<<<<< HEAD_</mark>.
 - التغييرات من testing هتبقى تحت <mark>_>>>>>>> testing_</mark>.
 - بينهم فاصل (`<mark>=</mark>==`).
-- ![Pasted%20image%2020250426234859.png](images/Pasted%20image%2020250426234859.png)
-- 
+ ![Pasted%20image%2020250426234859.png](images/Pasted%20image%2020250426234859.png)
+
+ 
  **Merge Conflicts**
+ 
 If you try to do merge commit with conflicting files in both branches git will notify you and abort the process. To check the conflicting portions of the file use `git status` then resolve the conflict then commit then merge again
 
 **<mark>git branch</mark> important options**
@@ -1133,6 +1171,7 @@ If you try to do merge commit with conflicting files in both branches git will n
 ![Pasted%20image%2020250426233219.png](images/Pasted%20image%2020250426233219.png)
 
 **git rebase**
+
 الrebase هو شكل اخر من الmerge.
 هو عباره عن merge عادي جدا بتعمل branches وفالاخر بتعمل `git rebase`. 
 Rebase is one of two Git utilities that specializes in integrating changes from one branch onto another. Merge is always a forward moving change record. Alternatively, rebase has powerful history rewriting features.
@@ -1143,9 +1182,12 @@ Rebase is one of two Git utilities that specializes in integrating changes from 
 Rebasing is the process of moving or combining a sequence of commits to a new base commit. Rebasing is most useful and easily visualized in the context of a feature branching workflow.
 
 ![Pasted%20image%2020250426235950.png](images/Pasted%20image%2020250426235950.png)
+
 **___________________________________________________________________________________________**
 
+
 # working with remotes 
+
 بما ان git هو **distribute version control** ف بالتالي اقدر أclone repo واشتغل عليه local عادي. مش لازم دايما يبقى الconnection شغال. واقدر لما اخلص التعديلات بتاعتي اعملها `push`. ولو حصل اي تعديل من الناس اللي بتcontribute فالrepo دي أقدر أpull الmodifications او الupdates دي.
 
 **working with remotes Architecture**
@@ -1324,11 +1366,14 @@ ________________________________________________
 وبيكون اسم الrepo او الURL بتاعه عباره عن `owner-name/repository-name`. والrepository-name ده اللي انت بتحطه ف حاول تعمله Unique بالنسبه للaccount بتاعك.
 
 ممكن اضيف `README` file وهو عباره عن markup file. ممكن اضيفه لو عايز اول ما حد يفتح الrepo الاقي زي description موجود جوه الfile وتكون حاجه descriptive تعرفه الRepo ده عباره عن ايه وبيعمل ايه.
+
 `README` file: <mark>_acts as an introduction and guide._</mark> It outlines how others can contribute, such as submitting bug reports or code. It shows how to use the project, often with examples .It gives a quick overview of what the project is and what it does. 
 
 ال`gitignore.` ده file بحط فيه الpatterns بتاعة الfile اللي مش عايزها تبقى موجوده فالrepo.
 بحيث يبقى في files هو مبيبصلهاش اصلا, مهما تعملها add او staging مش هتنضاف و مش هيعمل tracking لل files دي.
+
 It uses patterns (like `*`, `?`, or` /`) to specify what to exclude.
+
 Always double-check your `.gitignore` file before committing to make sure you’re not accidentally uploading files you meant to ignore.
 
 وادوس `create repository`
@@ -1341,10 +1386,13 @@ ______
 # basic GitHub Repo Operation 
 >الmian هو الmaster.
 
+
 اقدر اعدل واعمل كل حاجه.
+
 ممكن اضيف file عن طريق `Add file`. ممكن أupload file زي ما انا عايز.
 وعلى حسب الextesion اللي هتضيفه ل الfile فGitHub بيrecognise الfile ده.
 ![Pasted%20image%2020250427203301.png](images/Pasted%20image%2020250427203301.png)
+
 و بيقولك اعمل commit وبيقترح عليك الcommit message.
 
 ![Pasted%20image%2020250427203419.png](images/Pasted%20image%2020250427203419.png)
@@ -1361,6 +1409,7 @@ ______
 
 ممكن ابدأ اconverse مع الناس اللي بتشوف الrepo بتاعي. كل واحد يقدر يسيب comment.
 و موجود ده برضو فالissues
+
 ![Pasted%20image%2020250427205704.png](images/Pasted%20image%2020250427205704.png)
 
 مثلا يقولي في issue فالحته الفلانيه او الcode بيجيب معايا error مثلا. بعدين هو يقترح عليا حلول او أpass ده ل واحد من الcollaborators عشان يعدل.
@@ -1415,6 +1464,7 @@ _________
 ف مش منطقي اني اروح كل شويه اعمل add file والحوارات دي.
 
 من الطرق المستخدمه 
+
 اننا ن<mark>_create empty repo_</mark>. من الحاجات الحلوه في GitHub انه لما بcreate empty repo هو بيعرف انك هت populate الrepo ده من الdown stream ف بيديني شويه options لكل case. 
 ![Pasted%20image%2020250427222347.png](images/Pasted%20image%2020250427222347.png)
 
@@ -1422,14 +1472,17 @@ _________
 حتى لو تلاحظ دي مظهرتش قبل كده لما خليناه يadd الREADME file واحنا بنcreate الrepo.
 
  <mark>_push an existing repository from the command line_</mark> 
- لما يكون already عندي repo ,هو ده ال**typical workflow**. انه يكون already عندي repo وانا على الrepo ده locally اعرفله remote.
+ 
+ لما يكون already عندي repo ,هو ده ال**typical workflow**. انه يكون already عندي repo وانا على الrepo ده locally اعرفله remote. 
 حتى لو الrepo ده مكنش cloned, لو انت عامله from scratch اقدر اعرفله remote, يعني حته لو مش cloned من حاجه اقدر اعرفله upstream او remote.
 
 ف هعمل repo عندي locally واعمل اللي انا عايزه والcommits وكل حاجه. وبعدين اسمع كلام عمه GitHub واكتب `git remote add origin https://github.com/Mikhanagy55/rrepoooo.git`
+
 اهو ونتأكد وكل حاجه
 ![Pasted%20image%2020250427224956.png](images/Pasted%20image%2020250427224956.png)
-عادي نعمل upstream لو اسامي الbranches مختلفه بس ده مش كويس. ف نسمع كلامه تاني ونغير اسم الmaster ل 
-main![Pasted%20image%2020250427225144.png](images/Pasted%20image%2020250427225144.png)
+
+عادي نعمل upstream لو اسامي الbranches مختلفه بس ده مش كويس. ف نسمع كلامه تاني ونغير اسم الmaster ل main.
+![Pasted%20image%2020250427225144.png](images/Pasted%20image%2020250427225144.png)
 
 خلاص كله تمام نعمل اخر حاجه بقى اللي هو نعمل push. عن طريق `git push -u origin main`
 
@@ -1542,12 +1595,16 @@ before adding a new SSH key to the `ssh-agent` to manage your keys, you should h
 
 ده هيأكدلك إن GitHub عارف المفتاح بتاعك من غير ما تحتاج تعمل push.
 
-**What is the SSH Agent?**
- The **SSH Agent** is a background process that runs on your system to manage your SSH **private keys**. Its main job is to securely handle these keys and facilitate authentication with remote servers (e.g., GitHub) without requiring you to manually enter a passphrase or credentials every time you connect.
-
- Think of the SSH Agent as a "key manager" that holds your private keys in memory and automatically provides them to servers when needed, making your SSH interactions seamless.
- you can start it with `eval "$(ssh-agent -s)"`, add keys with `ssh-add`, and use it in VS Code’s terminal for seamless Git operations. 
- If you have multiple keys or issues with your old key tied to an IP, configure <mark>_~/.ssh/config_</mark> to ensure the correct key is used.
+>**What is the SSH Agent?**
+>
+The **SSH Agent** is a background process that runs on your system to manage your SSH **private keys**. Its main job is to securely handle these keys and facilitate authentication with remote servers (e.g., GitHub) without requiring you to manually enter a passphrase or credentials every time you connect.
+>
+ Think of the SSH Agent as a "key manager" that holds your private keys in memory and automatically >
+ provides them to servers when needed, making your SSH interactions seamless.
+ you can start it with `eval "$(ssh-agent -s)"`, add keys with `ssh-add`, and use it in VS Code’s >
+ terminal for seamless Git operations. 
+ If you have multiple keys or issues with your old key tied to an IP, configure
+ <mark>_~/.ssh/config_</mark> to ensure the correct key is used.
 
 نعمل pull والfetch 
 لو جيت على الorigin من GitHub وعلمت file وعملت commit. كده اصبح ان عندي 2file.
@@ -1637,3 +1694,4 @@ _______
 من ضمن الحاجات اللي اقدر اعملها على GitHub  انه احط policies و restrictions بحيث مين يقدر يcontribute او يقبل الpull requests في branches معينه. اقدر احدد ده والprotected branches ومين يقبل pull request كل pull request محتاج له كام approval. من الحاجات اللي موجوده في GitHub ومش موجوده في git.
 
 **made by  Mikhail Nagy**
+Thank you for reading. I hope you found the summary helpful.
