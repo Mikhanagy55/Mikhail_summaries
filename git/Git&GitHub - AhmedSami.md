@@ -689,7 +689,8 @@ Type git commit, git branch, and git checkout commands to your hearts desire
 احنا عمالين نقول versionsنتحرك بين ال versions وبتاع, احنا بنستخدمها بس لمجرد التسهيل انما فالحقيقه ممكن نقعد نعمل تعديلات و commit كتير  جدا بس مش دي الversions دي مجرد تعديلات بس.  لحد ما اوصل لcommit معين بالنسبالي ده version جديد بجد, مش كل ما اعدل line في file يبقى ده version هو مجرد تعديل.
 بوصل لحته ان في كام commit عايز اعلمهم احطلهم bookmark بقول ان الcommit دي مهم جداً.
 ف من ضمن الحاجات اللي اقدر اعملها اني اعمل tagging ل الcommits, اعلم على Commit اقوله ده version 2 و ده Version 2.5.
-we have 2types of tags.
+>[!note]
+>we have 2types of tags.
 **Lightweight**:
 very much like a branch that doesn't change it's just a pointer to a specific commit.
 **Annotated**:
@@ -699,16 +700,16 @@ stored as full objects in the git objects.
 ![[Pasted image 20250413122746.png]]
 
 السهوله وحلاوه الموضوع لو قولتله ![[Pasted image 20250413122822.png]]مش هاروح بقى اشوف الcommits وال`SHA1` والmessages عشان اعرف انهي واحده هي, بيخليني انط على طول فالversions. 
-
 لو تلاحظ الtag ده ليه tagger و Date والmessage لذلك==_هو object_==.
-
+>[!important]
 If you have some previous commits and you forgot to tag, you can later on tag a previous commit by referring to its checksum `SHA1`.![[Pasted image 20250413123437.png]]
 By default `git push` doesn't push tags. You mush specify
 ![[Pasted image 20250413123537.png]]
 **Lightweight Tags**
 Just a commit checksum added to a file, no more info stored.
 ![[Pasted image 20250413123302.png]]
-***___________________________________________________________________________________________***
+
+_______
 
 # Git Aliases
 note: ==this topic from _ProGit_ book copy-paste.==
@@ -745,16 +746,15 @@ At this point, you can do all the basic local Git operations — creating or clo
 changes, staging and committing those changes, and viewing the history of all the changes the
 repository has been through. Next, we’ll cover Git’s killer feature: its branching model.
 # Git Branching 
-هي من ضمن الحاجات المهمه في git ودايما هنستعملها, Git بيسهل التعامل معاها خالص.
+الBranches هي من ضمن الحاجات المهمه في git ودايما هنستعملها, Git بيسهل التعامل معاها خالص.
 
-هعمل الalias كده 
-`$git config --global alias.graph 'log --oneline --decorate --graph --all'`
-وتrun الكلام ده كده --> `git graph` بس كده. معملتهاش Graph بس عشان مايقولكش اعمل install package وحوار ملوش دعوه بيها. بس لو عايز تعملها انك تكتب graph بس فتexecute على طول, run اللي ب ال`alias command` ده 
-.
-`$alias graph='git log --oneline --decorate --graph --all'`
+>هعمل الalias كده 
+>`git config --global alias.graph 'log --oneline --decorate --graph --all'`,and run it with ==git graph==.
+ or `alias Graph='git log --oneline --decorate --graph --all'`, and run it with ==Graph==.
+
 ![[Pasted image 20250414010317.png]]
 
-زي ما احنا عرفين ان Git بيstore الdata الcommits بتاعته يعني عن طريق انه بيجمع كل الblobs والtrees تحت الroot tree بتعاهم ويwrap ألكلام ده في Commit بحيث الcommit يبقى فيه الparent commit والroot tree والcommiter وإلى اخره.  
+زي ما احنا عرفين ان Git بيstore الdata, الcommits بتاعته يعني عن طريق انه بيجمع كل الblobs والtrees تحت الroot tree بتعاهم ويwrap ألكلام ده في Commit بحيث الcommit يبقى فيه الparent commit والroot tree والcommiter وإلى اخره.  
 ![[Pasted image 20250413161803.png]]
 ***___________________________________________________________________________________________***
 ![[Pasted image 20250413162043.png]] [^3]
@@ -763,16 +763,18 @@ repository has been through. Next, we’ll cover Git’s killer feature: its bra
 ==_so branch is a linear layout of commits._==
 ![[Pasted image 20250413162853.png]]
 في اوقات كتير بيحصل اني ببقى عايز اني  اتفرع منه `forking` و اعمل revision تاني و أTest حاجه ازود feature أجرب أو احل issue و فنفس الوقت مش عايز اغير اي حاجه في اخر Commit او revision فالmaster.
-عشان اعمل ده حتاج اني اعمل Branch جديد هسميه مثلا testing, بعد كده اقدر احول على الtesting اعدل فيه واي تعديل هعمله هيكون مبني على الparent بتاعه اللي خدت منه الbranch.![[Pasted image 20250413171903.png]] واي تعديل هعمله commit هيتعمله revision فالrepo عادي بس هيبقى متعلم انه تبع الbranch اللي اسمه testing بقى.
-خلصت ورجعت لل master عادي اقدر اكمل اعمل commits عادي جدا. ![[Pasted image 20250413172244.png]]ده بيخلي الdevelopment بتاعي `non-linear`, كل branch لوحده هو linear بس لما اعمل اكتر من branch وكذا تفريعه واعدل فيهم فأصبح non-linear development.
-to create new branch we can use `git branch <branch-name>`, and to list my branches we can use `git branch`![[Pasted image 20250414010620.png]]
-هنا master ده بالاخضر يعني هو ده ال`current branch` , يعني لو جيت عدلت حاجه فالfile وعملت الcommit. الcommit دي هتبقى امتداد للmaster branch ده. و==_النجمه اللي هي الHEAD_==.
+عشان اعمل ده هحتاج اني اعمل Branch جديد هسميه مثلا testing, بعد كده اقدر احول على الtesting اعدل فيه واي تعديل هعمله هيكون مبني على الparent بتاعه اللي خدت منه الbranch.![[Pasted image 20250413171903.png]] واي تعديل هعمله ل الcommit هيتعمله revision فالrepo عادي بس هيبقى متعلم انه تبع الbranch اللي اسمه testing بقى.
+خلصت ورجعت لل master عادي اقدر اكمل اعمل commits عادي جدا. ![[Pasted image 20250413172244.png]]ده بيخلي الdevelopment بتاعي `non-linear`, كل branch لوحده هو linear بس لما اعمل اكتر من branch وكذا تفريعه واعدل فيهم فأصبح **non-linear development**.
+>[!important]
+>to create new branch we can use `git branch <branch-name>`, and to list my branches we can use `git branch`.![[Pasted image 20250414010620.png]]
+
+هنا **==master==** ده بالاخضر يعني هو ده ال`current branch` , يعني لو جيت عدلت حاجه فالfile وعملت الcommit. الcommit دي هتبقى امتداد للmaster branch ده. و==_النجمه اللي هي الHEAD_==.
 يعني اللي قدامي على الworking tree على الOS هو اللي فالmaster branch.
 
 ف كده دلوقتي الmaster والtesting branch فيهم نفس الcontent, واتأكد من ده لما اعمل `git log` او graph زي فوق. وانا لسه معملتش حاجه مجرد ان انا خدت branch من الmaster.![[Pasted image 20250414010900.png]]الHEAD بيشاور على الMaster. والMaster وال testing واقفين على الCommit صاحب ال`SHA1` ده.
 ![[Pasted image 20250414011915.png]]
 
-لو عايز اعمل switch ل الtesting branch هستخدم `git switch testing`, قبل كده كان اسمه `checkout` هو مازال موجود برضو.  ![[Pasted image 20250414012118.png]]و غير الbranch لما شوفنا الstatus و قالك احنا على الbranch testing , كده عملنا switch ل الtesting, فأصبح الtesting هو الcurrent والHEAD بيشاور عليه. ![[Pasted image 20250414012355.png]] والMaster وال testing واقفين على الrevision صاحب ال`SHA1` ده.بس الHEAD بيشاور على الtesting ف اذا الtesting هو الcurrent.
+لو عايز اعمل switch ل الtesting branch هستخدم `git switch testing`, قبل كده كان اسمه `checkout` هو مازال موجود برضو.  ![[Pasted image 20250414012118.png]]و غير الbranch لما شوفنا الstatus و قالك احنا على الtesting branch , كده عملنا switch ل الtesting, فأصبح الtesting هو الcurrent والHEAD بيشاور عليه. ![[Pasted image 20250414012355.png]]والMaster وال testing واقفين على الrevision صاحب ال`SHA1` ده.بس الHEAD بيشاور على الtesting ف اذا الtesting هو الcurrent.
 
 ف دلوقتي لو عملت اي تعديل فالfile وعملت commit ده هيعمل revision جديد.
 الrevision دي هتبقى في ال`testing branch`
@@ -791,9 +793,10 @@ to create new branch we can use `git branch <branch-name>`, and to list my branc
 
 لما اعمل Switch يعتبر `اكني` عملت reset لأن يعتبر كلهم على خط واحد ف اقدر ارجع Linearly.
 ![[Pasted image 20250426130705.png]]
-**IMPORTANT**: switching to a different branch not only moves the HEAD pointer to that branch but also reverts the contents of the working tree to that point in time. Moving the HEAD is like rewinding
+>[!IMPORTANT]
+>switching to a different branch not only moves the HEAD pointer to that branch but also reverts the contents of the working tree to that point in time. Moving the HEAD is like rewinding
 
-[^3]: the **master branch** is the default primary branch in a repository. It serves as the main line of development, typically containing the most stable and production-ready version of a project’s codebase. The master branch is created automatically when a repository is initialized and is often used as the reference point for integrating changes from other branches
+ >the **master branch** is the default primary branch in a repository. It serves as the main line of development, typically containing the most stable and production-ready version of a project’s codebase. The master branch is created automatically when a repository is initialized and is often used as the reference point for integrating changes from other branches
 
 # Merging Branches
 التعدبلات اللي عملتها فالtesting دي لو انا راضي عنها ممكن اعملها `merging`.
@@ -801,7 +804,7 @@ to merge branches we can use `git merge`.
 ![[Pasted image 20250426133052.png]]
 ==__merging testing branch into master branch__==
 بعمل الmerge وانا واقف في الbranch اللي هيحصل فيه الmerging.
-==___المعلم git بيختار طريقة الـ merge بناءً على شكل الـ commit history بتاعك.___==
+___==المعلم git بيختار طريقة الـ merge بناءً على شكل الـ commit history بتاعك.==___
 هو بيقول fast forward لأن ده اللي حصل, الmerge هنا عباره عن اني نقلت الmaster والhead خطوه قدام ل الcommit اللي testing بيشاور عليها. عشان كده اسمه fast forward. 
 الfast forward حصل لأن مفيش اي commits زياده فالmaster, بالتالي كلهم على خط واحد, ف هنقل الpointer وخلاص.
 ![[Pasted image 20250426172423.png]]
@@ -812,7 +815,7 @@ to merge branches we can use `git merge`.
 _____________________________
 مش ده دايما الcase اللي موجود مش لازم الdevelopment يكون linear.
 اللي بيحصل مثلا اني بعمل branch والعب فيه وفي نفس الوقت انا بعدل  اصلا فالmaster واعمل commits.![[Pasted image 20250426174525.png]]
-that's what is called `Divergent History`.
+>that's what is called `Divergent History`.
 
 ![[Pasted image 20250426183330.png]]
 خلصت انا كده وعايز اعمل merge,  هيختلف هنا الmerging مش هينفع الfast forward لأن الhistory مش عباره عن خط من الCommits اقدر اروح واجي عليه لا.
@@ -835,7 +838,7 @@ ________________________
 ____________
 
 ساعات ممكن اجي اعمل merge ف يحصل `conflict`  ده بيحصل مثلا لما اكون انا معدل في نفس الfile فال2 branches.  
-how can we solve this?
+**how can we solve this?**
 
 هيعدل فالfile ده و هيقولي في تعديل فالmaster شكله كده وفي تعديل فالTesting شكله كده انت عايز تسيب انهي واحده فيهم 
 هبص على الstatus واشوف الconflicts فين واحلها.  لما اعمل `git status`  هلاقي جمب الfile اللي فيه الconflict مكتوب انه  `both modified` .
@@ -852,10 +855,10 @@ If you try to do merge commit with conflicting files in both branches git will n
 ![[Pasted image 20250426233219.png]]
 
 **git rebase**
-ال rebase هو شكل اخر من الmerge.
+الrebase هو شكل اخر من الmerge.
 هو عباره عن merge عادي جدا بتعمل branches وفالاخر بتعمل `git rebase`. 
 Rebase is one of two Git utilities that specializes in integrating changes from one branch onto another. Merge is always a forward moving change record. Alternatively, rebase has powerful history rewriting features.
-الفرق انها لما تستخدم الmerge بتلاقي الcommits لسه موجوده عادي. لكن الrebase بيخلي الموضوع يرجع linear history تاني كأن محصلش branching قبل كده.
+الفرق انه لما تستخدم الmerge بتلاقي الcommits لسه موجوده عادي. لكن الrebase بيخلي الموضوع يرجع linear history تاني كأن محصلش branching قبل كده.
 ![[Pasted image 20250426235631.png]]
 
 Rebasing is the process of moving or combining a sequence of commits to a new base commit. Rebasing is most useful and easily visualized in the context of a feature branching workflow.
@@ -863,7 +866,7 @@ Rebasing is the process of moving or combining a sequence of commits to a new ba
 ***___________________________________________________________________________________________***
 
 # working with remotes 
-بما ان git هو distribute version control ف بالتالي اقدر أclone repo واشتغل عليه local عادي. مش لازم دايما يبقى الconnection شغال. واقدر لما اخلص التعديلات بتاعتي اعملها `push`. ولو حصل اي تعديل من الناس اللي بتcontribute فالrepo دي أقدر أpull الmodifications او الupdates دي.
+بما ان git هو **distribute version control** ف بالتالي اقدر أclone repo واشتغل عليه local عادي. مش لازم دايما يبقى الconnection شغال. واقدر لما اخلص التعديلات بتاعتي اعملها `push`. ولو حصل اي تعديل من الناس اللي بتcontribute فالrepo دي أقدر أpull الmodifications او الupdates دي.
 
 **working with remotes Architecture**
 ![[Pasted image 20250427002711.png]]
@@ -969,13 +972,13 @@ so we can type `git push -u origin feature`
 ________________________________________________
 # Introduction to GitHub
 ممكن نعتبر الgithub زي web hosting ب host عليه الrepos بتاعتي. او أaccess hosted repos من حد تاني.
-هو من الحاجات اللي بتخلي git يحقق فكره انه distributed version control. 
+هو من الحاجات اللي بتخلي git يحقق فكره انه**distributed version control**. 
 
 ممكن انا اعمل repository عادي عن طريق اني أclick على ==__New__==. ![[Pasted image 20250427195920.png]]
 وبيكون اسم الrepo او الURL بتاعه عباره عن `owner-name/repository-name`. والrepository-name ده اللي انت بتحطه ف حاول تعمله Unique بالنسبه للaccount بتاعك.
 
 ممكن اضيف `README` file وهو عباره عن markup file. ممكن اضيفه لو عايز اول ما حد يفتح الrepo الاقي زي description موجود جوه الfile وتكون حاجه descriptive تعرفه الRepo ده عباره عن ايه وبيعمل ايه.
-==_acts as an introduction and guide._== It outlines how others can contribute, such as submitting bug reports or code. It shows how to use the project, often with examples .It gives a quick overview of what the project is and what it does. 
+`README` file: ==_acts as an introduction and guide._== It outlines how others can contribute, such as submitting bug reports or code. It shows how to use the project, often with examples .It gives a quick overview of what the project is and what it does. 
 
 ال`gitignore.` ده file بحط فيه الpatterns بتاعة الfile اللي مش عايزها تبقى موجوده فالrepo.
 بحيث يبقى في files هو مبيبصلهاش اصلا, مهما تعملها add او staging مش هتنضاف و مش هيعمل tracking لل files دي.
@@ -989,10 +992,11 @@ ______
 ***__________________________________________________________________________________________***
 
 # basic GitHub Repo Operation 
-الmian هو الmaster.
+>الmian هو الmaster.
+
 اقدر اعدل واعمل كل حاجه.
 ممكن اضيف file عن طريق `Add file`. ممكن أupload file زي ما انا عايز.
-وعلى حسب الextesion اللي هتضيفه لل file فGitHub بيrecognise الfile ده.![[Pasted image 20250427203301.png]]
+وعلى حسب الextesion اللي هتضيفه ل الfile فGitHub بيrecognise الfile ده.![[Pasted image 20250427203301.png]]
 و بيقولك اعمل commit وبيقترح عليك الcommit message.
 ![[Pasted image 20250427203419.png]]
 
@@ -1003,12 +1007,11 @@ ______
 و موجود ده برضو فالissues ![[Pasted image 20250427205704.png]]مثلا يقولي في issue فالحته الفلانيه او الcode بيجيب معايا error مثلا. بعدين هو يقترح عليا حلول او أpass ده ل واحد من الcollaborators عشان يعدل.
 
 الطبيعي عندي فالworkflow ان الrepo بتاعي بحضره locally عندي و بعدين أpush ل الGitHub account بتاعي.
-
 اقدر اعدل في حاجات كتير في GitHub عن طريق الsetting
 1-احدد مين الcollaborators معايا او بيcontribute ل الrepo ده.
 2-اعدل ال visibility بتاعته
 3-امسح الrepo خالص
-4-etccc 
+4-etc
 5- أقدر اعمل protected branches محدش يقدر يوصلها, ودي Features مش موجوده في Git.
 
 موجود desktop version ل GitHub لكن ل mac و windows فقط.
@@ -1019,10 +1022,10 @@ _________
 ![[Pasted image 20250427211825.png]]
 ف انا هنا على الfeature branch واي تعديل هعمله هيبقى committed على ال feature branchده.![[Pasted image 20250427212144.png]]بعد ماتعمل الcommit 
 من ضمن الoptions اللي هيديهالك ==__Compare & pull request__== ده اللي بيوديني فالاخر ل ال`merge`.
-أ click على ==__Compare & pull request__==  
-هلاقيه مقترح الmessage عادي. و بيقولي انها ==able to merge== الfeature branch  ده into الmain branch. ف أclick على ==__create pull request__==![[Pasted image 20250427214249.png]]
-ثم  ==__merge pull request__== ![[Pasted image 20250427214628.png]] 
-ثم  اكتبله ال`commit merge message` و أclick على ==__confirm merge__==.![[Pasted image 20250427214642.png]]وأقدر في كل مره اسيب Comment كده.
+أ click على __==Compare & pull request==__  
+هلاقيه مقترح الmessage عادي. و بيقولي انها ==able to merge== الfeature branch  ده into الmain branch. ف أclick على __==create pull request==__![[Pasted image 20250427214249.png]]
+ثم  __==merge pull request==__ ![[Pasted image 20250427214628.png]] 
+ثم  اكتبله ال`commit merge message` و أclick على __==confirm merge==__.![[Pasted image 20250427214642.png]]وأقدر في كل مره اسيب Comment كده.
 بس كده الmerge خلص خلاص. ![[Pasted image 20250427214915.png]]ممكن اdelete الbranch عادي لو خلصت اللي انا عايزه.
 ***___________________________________________________________________________________________***
 # Basic GitHub Workflow  
@@ -1034,9 +1037,9 @@ _________
 من الطرق المستخدمه 
 اننا ن==_create empty repo_==. من الحاجات الحلوه في GitHub انه لما بcreate empty repo هو بيعرف انك هت populate الrepo ده من الdown stream ف بيديني شويه options لكل case. ![[Pasted image 20250427222347.png]]حتى لو تلاحظ دي مظهرتش قبل كده لما خليناه يadd الREADME file واحنا بنcreate الrepo.
 
- ==_*push an existing repository from the command line*_== 
- لما يكون already عندي repo ,هو ده ال typical workflow. انه يكون already عندي repo وانا على الrepo ده locally اعرفله remote.
-  حتى لو الrepo ده مكنش cloned, لو انت عامله from scratch اقدر اعرفله remote, يعني حته لو مش cloned من حاجه اقدر اعرفله upstream او remote.
+ ==_push an existing repository from the command line_== 
+ لما يكون already عندي repo ,هو ده الtypical workflow. انه يكون already عندي repo وانا على الrepo ده locally اعرفله remote.
+حتى لو الrepo ده مكنش cloned, لو انت عامله from scratch اقدر اعرفله remote, يعني حته لو مش cloned من حاجه اقدر اعرفله upstream او remote.
 
 ف هعمل repo عندي locally واعمل اللي انا عايزه والcommits وكل حاجه. وبعدين اسمع كلام عمه GitHub واكتب `git remote add origin https://github.com/Mikhanagy55/rrepoooo.git`
 اهو ونتأكد وكل حاجه![[Pasted image 20250427224956.png]]
@@ -1051,8 +1054,8 @@ _________
 لازم يكون عندك permissions عشان تقدر انك تpush وتعدل في GitHub. 
 عندي طريقه من اتنين في موضوع الpermissions ده.
 
-لو تاخد بالك بما ان VS code عنده الsupport ل git والGitHub, ف هو بيديك options. بيقولك sign in `authenticate`. 
-حتى هتلاقي ده  لما تجرب تpush من الCLI.
+لو تاخد بالك بما ان VS code عنده الsupport لgit والGitHub, ف هو بيديك options. بيقولك sign in `authenticate`. 
+حتى هتلاقي ده لما تجرب تpush من الCLI.
 و ده المنطقي والطبيعي هتلاقيه بيقولك اكتبلي username و password.
 ![[Pasted image 20250428015802.png]]
 كأني عملت authentication على GitHub. حتى هو طالب الusername بتاعة `htts://github.com`. 
@@ -1071,7 +1074,7 @@ note
 1-for security reasons
 2-مش دايما هتكون بتpush على Account بتاعك اصلا. وممكن تكون بتpush على حاجه مفتوحه مؤقتاً لل contribution او حاجه ملكش ليها access. الى اخره.
 
-##### SSH 
+#### SSH 
 ![[Pasted image 20250428021418.png]]
 ![[Pasted image 20250428021546.png]]
 هنستعمل الURL بتاع الSSH ده. وعملنا الshort name بتاع الremote اسمه `ssh-origin`.
@@ -1089,7 +1092,6 @@ note
 ف اللي بيحصل ان GitHub account بيقارن بين الkey اللي متخزن عنده واللي متخزن عندي locally على الmachine. لو الاتنين متطابقين, اذا الراجل ده من حقه يpush ويcontribute على الrepo دي.
 
 so, The next step is to generate an SSH public key and add it to your GitHub account’s SSH settings.
-
 ![[Pasted image 20250428023733.png]]
 حتى هو بيوريني ازاي اعمل generate ل الkey.
 
@@ -1153,9 +1155,9 @@ before adding a new SSH key to the `ssh-agent` to manage your keys, you should h
 ده واحد من الworkflows انه اكون شغال على الrepo بتاعتي انا. الremote على GitHub والlocal على الmachine.
 
 # Forking GitHub Repos
-اغلب الشغل بيبقى الشغل مش على الrepo بتاعتي بيبقى على repos بتاعة ناس تانيه.
+اغلب الشغل الشغل مش على الrepo بتاعتي, بيبقى على repos بتاعة ناس تانيه.
 
-ازاي أContribute في repo زي hello world. هنا الworkflow هيختلف. مش الpush والpull المباشر اصل الrepo ده مش بتاعي.
+ف ازاي أContribute في repo زي hello world. اذاً هنا الworkflow هيختلف. مش الpush والpull المباشر اصل الrepo ده مش بتاعي.
 اول حاجه هعملها هو اني اعمل `fork` ل الrepo ده. ده معناه اني بعمل copy من الrepo ده من على GitHub ل GitHub account بتاعي. 
 ف هيتعمل repo عندي على الGitHub account بتاعي. هيكون نسخه من ده ويبقى `forked` منه بنفس الاسم والcontent وكل حاجه.
 عشان اعمل fork. هاروح أclick على `fork`![[Pasted image 20250428150922.png]]هتلاحظ ان في 1500 واحد عاملين ل الrepo ده fork.
@@ -1164,7 +1166,7 @@ _______
 
 ![[Pasted image 20250428151135.png]]
 
-وهتلاقي كل settings والcommits وال configuration كلها موجوده.
+وهتلاقي كل settings والcommits وال configuration كلها موجوده عندك.
 
 من ضمن الحاجات اللي اقدر اعملها بعد الfork اني أ`Fetch upstream` او أ`contribute`![[Pasted image 20250428151806.png]]
 طب عايز ابدأ إني أcontribute مع الناس دي, عايز أpush انا كمان.
