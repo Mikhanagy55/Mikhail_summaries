@@ -84,6 +84,7 @@ _______
 حاجه كمان انا مش بس بconnect على الdistributed version اللي على الServer, لا ده انا ممكن أconnect فنفس الوقت ولنفس الproject على واحده تاني او PC تاني. 
 ف كده انا باخد التعديلات من ال Server الاصلي اللي عملت منه الClone ومن واحد تاني شغال على نفس ال Project. ف اشوف التعديلات من ده ومن ده أpush تعديلاتي هنا وهنا.
 ![Pasted%20image%2020250402160100.png](images/Pasted%20image%2020250402160100.png)
+
 عشان كده اسمه **distributed version control**. حيث انه مش Local ومش Central.
 >**GIT is a Distributed Version Control.**
 
@@ -154,6 +155,7 @@ __________________________________________________________________________
 **How can we apply these requirements?**
 
 ![Pasted%20image%2020250402225503.png](images/Pasted%20image%2020250402225503.png)
+
 معرفش أtrack everything كده, افرض ال file ده غير اسمه ل b.txt مثلا ف مش هعرف اوصله, 
 محتاج انه الحاجه اللي بتعرف او بتميز الobject اللي بعمله tracking ده متكونش جزء من الحاجات اللي بعملها tracking, مبتتغيرش يعني مفيش مجال للتعديل فيها. 
 اسم الfile مميزه ليه ماشي, لكن افرض انا مسحت الfile ده و عملت واحد تاني اسمه برضو A.txt هنلغبط بعض بقى. اصلا الاسم ده من الحاجات اللي انت بتtrack it ف مينفعش تبقى هي الID بتاعك.
@@ -193,6 +195,7 @@ __________________________________________________________________________
 >or built-in mechanism that uses a hash function, It is seamlessly integrated into Git's core architecture and automatically generates unique identifiers
 
 ![Pasted%20image%2020250403122821.png](images/Pasted%20image%2020250403122821.png)
+
 ال$X$ ممكن تكون مثلا repo ,character, file, folder اي حاجه, وعلى حسب الالجوريزم اللي بتستخمه الhash function ,بيكون شكل ال$F(x)$, ممكن مثلا تستخدم Algorithm معين فالhashing ف تطلعلي شويهhexadecimal characters وتبقى unique.
 >The output **F(X)** is a **160-bit** hash value, commonly displayed as a **40-character hexadecimal string** (e.g., a1b2c3d4...). This string serves as a unique identifier for the input data **X** within the Git repository, such as a commit, file, or directory.
  .The specific algorithm used in **Git** is **SHA-1** (`Secure Hash Algorithm 1`), a cryptographic hash function.
@@ -205,7 +208,8 @@ __________________________________________________________________________
 
 ![Pasted%20image%2020250403130628.png](images/Pasted%20image%2020250403130628.png)
 ال**stdin--** عشان ياخد input من الpipeing.
-الcommand اللي بيعمل نفس الكلام ده في Linux اسمه`shasum`.![Pasted%20image%2020250403130935.png](images/Pasted%20image%2020250403130935.png)
+الcommand اللي بيعمل نفس الكلام ده في Linux اسمه`shasum`.
+![Pasted%20image%2020250403130935.png](images/Pasted%20image%2020250403130935.png)
 
 طب ليه الاختلاف مع ان الاتنين بيستخدموا SHA1؟؟
 زي ما احنا عارفين ان git مش بس بياخد الContent بتاع الObject كمان بياخد الmetadata, اللي بيحصل ان git مش بيشوف `Hello, Git` كده لا ده هو بيزود عليها حاجات  هو بيزود 3 حاجات 
@@ -213,10 +217,14 @@ __________________________________________________________________________
 2-size
 3-null character
 ف لما تديله `Hello, Git` مش هياخدها كده اللي هو حته text وخلاص لا هو بيجود من عنده الاول بعد كده ياخد كله على بعضه ويعمل الhash ل الobject ده.  
-ف هو بيشوفها كده ![Pasted%20image%2020250403132411.png](images/Pasted%20image%2020250403132411.png) الtype بعدين ال sizeاللي هو `11` مش 10 عشان في line break فالاخر مش ظاهر بس الterminal بتحطه. ثم null  character بعدين يحط الtext. 
+ف هو بيشوفها كده 
+![Pasted%20image%2020250403132411.png](images/Pasted%20image%2020250403132411.png)
+الtype بعدين الsize اللي هو `11` مش 10 عشان في line break فالاخر مش ظاهر بس الterminal بتحطه. ثم null  character بعدين يحط الtext. 
 اي تغير ولو ايه هيفرق لأن الAlgorithm شغال اصلا على ال ASCII وال binary format.
 
-عشان Linux يشوف ال`0\` انه escape character مش مجرد text عادي بنضيف option `-e` على الecho command.![Pasted%20image%2020250403133207.png](images/Pasted%20image%2020250403133207.png)
+عشان Linux يشوف ال`0\` انه escape character مش مجرد text عادي بنضيف option `-e` على الecho command.
+![Pasted%20image%2020250403133207.png](images/Pasted%20image%2020250403133207.png)
+
 لو جربت ت pass الformat اللي git بيشوفها وبيعملها ل`shasum`  هيطلعلك نفس ال$f(x)$ او نفس الhexadecimal characters.
 وgit بيعمل الsha1 عشان يتأكد ان مفيش اي تغيير. وهي الRequierment الجايه.
 ***____________________________________________________________________________________________***
@@ -231,6 +239,7 @@ ________________________________________________________________________________
 كانوا بيعتمودا حاجه اسمه `two-tree architecture`
 اللي هو يبقى عندي الworking tree والRepo, انا اشتغل فالworking tree وبعدين اعمل التعديلات  بتاعتي و ا push التعديلات دي على الrepo و الrepo بيخزنها. جيت وقت تاني عملت تعديلات وبعدين أpush اللي عملته ف يخزن version جديد ويشيل.
 ف كده انا عندي 2trees واحد الWorking tree اللي بفتح اشوف فيه الfiles واعدل فيه او الOS يعني , والتاني اللي متخزن فيه الversion control والobjects. 
+
 ![Pasted%20image%2020250403143540.png](images/Pasted%20image%2020250403143540.png)
 That is what is called a **two-tree architecture**.
 ________________________________________________________________________________
@@ -239,7 +248,9 @@ in Git architecture introduced
 اكيد عندي الworking directory و الrepo ,في النص مابينهم بقى موجود tree تانيه اسمها `staging Area` او الindex. هو يبان tree لكن هو physically عباره عن file.
 مثلا عندي File و عدلت فيه بدل ما اوديه مره واحده على الRepo زي ال `two-tree architecture` لا بعمله staging الاول, staging اللي هو بهيأه وبظبطه عشان يتعمله commit والخطوه اللي بعد كده اني اعمله commit ل الrepo.
 طب ايه الCommit دي؟
-معناها هو تrecord ألتعديل بتاع الobject فالrepo. اللي هو بعتمد التعديل ده فالversion control repo بتاعي. ![Pasted%20image%2020250403150600.png](images/Pasted%20image%2020250403150600.png)
+معناها هو تrecord ألتعديل بتاع الobject فالrepo. اللي هو بعتمد التعديل ده فالversion control repo بتاعي.
+![Pasted%20image%2020250403150600.png](images/Pasted%20image%2020250403150600.png)
+
 هل هو مجرد Step ملهاش لازمه؟
 الstaging area او موضوع الcommit او انك ت save الobject او الversion الجديد ده على خطوتين بيserve اكتر من حاجه, اول حاجه انه بيserve الworkflow بتاعك. بدل ما يبقى عندي 20000 Version اتوه منهم, لا يبقى عندي فرصه اراجع اللي عملته وابص عليه واشوف الفرق بينه وبين اللي فات فالrepo و اقرر قرار نهائي هل اعتمد الكلام ده ولا لا.
 
@@ -259,7 +270,8 @@ _____
 # Git File States
 **الindex و ايه اللي بيحصل فيه؟**
 الindex او الstaging area ده هو مجرد file. 
-لو لأول مره بintialize الrepo بتاعي ![Pasted%20image%2020250403155527.png](images/Pasted%20image%2020250403155527.png)
+لو لأول مره بintialize الrepo بتاعي 
+![Pasted%20image%2020250403155527.png](images/Pasted%20image%2020250403155527.png)
 
 فgit هنا ميعرفش اي حاجه عن الFile اللي فالworking tree بتاعي,  الState او الحاله بتاعة الfile ده دلوقتي اسمها `UNtracked`. يعني git شايفه بس مش متابع فيه اي حاجه, عدل زي ما انت عايز واصلا Git مش متابع الversions بتاعته معندوش منه objects او snapshots او اي حاجه ليها علاقه بيه.
 
@@ -272,6 +284,7 @@ _____
 > ال`git commit` هي الstep اللي بيتعمل فيها اول snapshot. اومال الblob اللي الgit عمله ده ايه؟ده يا معلم لزوم الtracking بس عشان يقولي اه حصل تغير هنا وهكذا لكن عشان اخد snapshots منه لازم أ`git commit`. 
 
 ![Pasted%20image%2020250403171557.png](images/Pasted%20image%2020250403171557.png)
+
 >التسلسل الطبيعي
 1-`git add` : stage files for old files, if new file convert it form untracked to tracked.
 لو الfile مش جديد وalready عدلت فيه قبل كده وعملتله 1000 commit قبل كده وجيت عدلت فيه ف  الfile بيبقى `modified`. عدلت ولسه معملتش commit.
@@ -284,6 +297,7 @@ _____
 بالنسبه ل git بيشوف الfiles ازاي؟ 
 الكلام ده جوه الrepo
 ![Pasted%20image%2020250403174710.png](images/Pasted%20image%2020250403174710.png)
+
 اي file عندي بيبقى ليه حاله من اتنين. Either `untracked(U)` or `tracked`.
 الtracked بقى بيبقى `(M)modified` او `unmodified`
 1-`modified(M)`
@@ -296,6 +310,7 @@ ____________________________________________________
 # git installation
 ممكن تنزله على Linux عن طريق الcommand ده `sudo apt install git `
 ![Pasted%20image%2020250404191310.png](images/Pasted%20image%2020250404191310.png)
+
 >"The first step is to create a directory that will serve as the project folder, which will later be initialized as a Git repo."
 the project folder is like a home for both your current work and the record of all past versions. The `.git` folder inside it is what makes version control possible—it’s where Git stores everything it needs to let you go back to older versions or track your changes.
 
@@ -303,6 +318,7 @@ the project folder is like a home for both your current work and the record of a
 بس قبل ما اعمل الinitialization والfolder بتاع git وكل ده في configuration مهم لازم اعمله لgit.
 هو اني بس اكتب اسمي والemail بتاعي, ده  اقل Configuration ممكن يحصل, في configurations كتير ممكن تحصل, ممكن اشوف الlist بتاعة الconfiguration  اللي في git. هو فالاول وفالاخر مجرد file  اسمه `config file` واقدر اعدل فيه manual عاي.
 ![Pasted%20image%2020250404185128.png](images/Pasted%20image%2020250404185128.png)
+
 ده عشان لما اجي اعمل الstaging بتاع الfile او الcommit و ابعت الversion على الrepo بتاعي لازم يسجل ويقول مين اللي عمل التعديل ده مين اللي اعتمد الكلام ده. ده distributed version control فلازم يسجل ان فالوقت كذا فلان الفلاني عمل كذا كذا. يعني بيtrack history بي track everything. 
 
 note 
@@ -313,21 +329,27 @@ note
 <mark>**/.git/config**</mark> 
 ![Pasted%20image%2020250404194808.png](images/Pasted%20image%2020250404194808.png)
 
-لو عايز اشوف الConfiguratio هستعمل ![Pasted%20image%2020250404195540.png](images/Pasted%20image%2020250404195540.png)
-كده انا جاهز اني استعمل Git.  فهروح ل الproject folder و أinitialize الgit repo,![Pasted%20image%2020250404202102.png](images/Pasted%20image%2020250404202102.png)
+لو عايز اشوف الConfiguratio هستعمل
+![Pasted%20image%2020250404195540.png](images/Pasted%20image%2020250404195540.png)
+كده انا جاهز اني استعمل Git.  فهروح ل الproject folder و أinitialize الgit repo,
+![Pasted%20image%2020250404202102.png](images/Pasted%20image%2020250404202102.png)
 
-خلاص عملت ألproject Folder وعملت file جواه, اشتغلت فيه يعني. عايز بقى أinitialize git جواه و احول الproject Folder ده الى Repository ,ف هعمل ده عن طريق اني اقوله `git init` لاحظ انك لازم تexecute ألcommand ده من جوه الproject folder. اول ما تexecute الCommand ده, بيتعمل folder مخفي إسمه `git.`، وده اللي بيخزن كل الـ versions والتاريخ بتاع الproject.![Pasted%20image%2020250404202848.png](images/Pasted%20image%2020250404202848.png)
+خلاص عملت ألproject Folder وعملت file جواه, اشتغلت فيه يعني. عايز بقى أinitialize git جواه و احول الproject Folder ده الى Repository ,ف هعمل ده عن طريق اني اقوله `git init` لاحظ انك لازم تexecute ألcommand ده من جوه الproject folder. اول ما تexecute الCommand ده, بيتعمل folder مخفي إسمه `git.`، وده اللي بيخزن كل الـ versions والتاريخ بتاع الproject.
+![Pasted%20image%2020250404202848.png](images/Pasted%20image%2020250404202848.png)
 
 وحتلاقيه عمل ال folder اللي اسمه`git.` 
 ![Pasted%20image%2020250404203233.png](images/Pasted%20image%2020250404203233.png)
+
 كده تَحول الproject بتاعك الى repo.
 ![Pasted%20image%2020250404203913.png](images/Pasted%20image%2020250404203913.png)
+
 الconfig file هو الfile اللي فيه الconfiguration زي ما قولنا. الobjects directory هنا بقى في الgit objects كله بقى الblob والtree والcommits والtagged annotation.
 لو دخلت جوه الobjects directory مش هنلاقي objects خالص, which is make sense.
 
 طبعاً الfile اللي عملناه فالproject folder دلوقتي الstate بتاعته `untracked`.
 ولذلك عشان اشوف الFiles اللي عندي واشوف الحاله بتاعتهم هنستخدم command اسمه `git status` بيوريني حاله الfile اللي عندي سواء tracked او untracked او modified او unmodified و الوضع ايه فالworking tree. ولازم ت execute الcommad ده في الworking tree. 
 ![Pasted%20image%2020250404205503.png](images/Pasted%20image%2020250404205503.png)
+
 No commits yet:
 يعني مفيش اي Snapshots بأي شكل, مفيش اي version من الcode بتاعك.
 Untracked file:
@@ -341,41 +363,58 @@ ____________________________________________________________________
 # Explore Git Objects and Trees
 احنا عندنا three-trees ال<mark>working tree</mark> وال<mark>staging tree</mark> اللي هو الindex وال<mark>repo tree</mark> اللي هو فيه الversions والcommits و الobjects وكل ده. عشان ال**three-tree architecture**.
 
-طب لو انا عايز اشوف اللي في ده وفي ده, مثلا ابسط حاجه هاشوف اللي فالworking tree بالcommand `ls` ![Pasted%20image%2020250404232116.png](images/Pasted%20image%2020250404232116.png)
+طب لو انا عايز اشوف اللي في ده وفي ده, مثلا ابسط حاجه هاشوف اللي فالworking tree بالcommand `ls`.
+![Pasted%20image%2020250404232116.png](images/Pasted%20image%2020250404232116.png)
+
 زي كده بقى انا عايز اشوف الحاجات اللي فالindex اللي هو فالStaging areaوالحاجات اللي فالrepo, اعمل ايه؟
-الحاجات اللي فالindex ليها Command هيوريني كل حاجه فالstaging area اللي هو `git ls-files`
+الحاجات اللي فالindex ليها Command هيوريني كل حاجه فالstaging area اللي هو `git ls-files`.
 ![Pasted%20image%2020250404232413.png](images/Pasted%20image%2020250404232413.png)
+
 هنا لاقيناه فاضي وده معناه ان الrepo بتاعي مش بيtrack اي files خالص وده معناه إن الـ staging area عندك خالية تمامًا من أي ملفات أو تغييرات متظبطة للتسجيل. ماهو الindex هو اللي بيعرف git يتابع انهي Versions وانهي files عشان git يقارن بيه. وده اللي الindex بيعرفه لما تعمل `git add` عشان يضيف تعديلاتك على الindex ولو file جديد يبدأ الtracking. 
 
 بالنسه للrepo مفيش command مباشر, بس في طريقه في technique من Linux نفسه.
-ممكن استخدم find command عشان اشوف حاجه معينه بدور عليها مثلا بدور على الobjects اللي من نوع file ![Pasted%20image%2020250404234348.png](images/Pasted%20image%2020250404234348.png)
-يبقى كده عندي file واحد فالworking tree والrepo والindex فاضيين.![Pasted%20image%2020250404234603.png](images/Pasted%20image%2020250404234603.png)
+ممكن استخدم find command عشان اشوف حاجه معينه بدور عليها مثلا بدور على الobjects اللي من نوع file
+![Pasted%20image%2020250404234348.png](images/Pasted%20image%2020250404234348.png)
+
+يبقى كده عندي file واحد فالworking tree والrepo والindex فاضيين.
+![Pasted%20image%2020250404234603.png](images/Pasted%20image%2020250404234603.png)
+
 ف اول خطوه عندي اني أstaged الfiles اللي عندي عن طريق `git add`. في الحاله دي `git add` بيحول الfile من `(U)untracked` الى `tracked`. و بيجهزوا لأول commit.  
-الطبيعي اني هكتب `git add` وبعدها اسم الfile. ![Pasted%20image%2020250405000851.png](images/Pasted%20image%2020250405000851.png)
+الطبيعي اني هكتب `git add` وبعدها اسم الfile.
+![Pasted%20image%2020250405000851.png](images/Pasted%20image%2020250405000851.png)
+
 يعني لو 100 file فالproject هقعد اضيفهم file file ?!!
-اقدر استعمل الregular expressions وال glob patterns بتاع الfile names ![Pasted%20image%2020250405001108.png](images/Pasted%20image%2020250405001108.png)
+اقدر استعمل الregular expressions وال glob patterns بتاع الfile names 
+![Pasted%20image%2020250405001108.png](images/Pasted%20image%2020250405001108.png)
 أو اقوله ضيفلي كل حاجه موجوده عن طريق `*` او `.`"current directory" .
 والطبيعي فالامر اني مش محتاج اعمل الكلام ده اللي هو مش محتاج أtrack كل files اللي عندي, ماهو في files مابتتغيرش اصلا ف مش محتاجه وجع دماغ كل مره هتبقى فالsnapshots بلا سبب زي ال OS generated files. 
 كل حاجه بتبدأ ب `git add`.
 نعمل `git status` نشوف ايه الدنيا دلوقتي.
 ![Pasted%20image%2020250405001919.png](images/Pasted%20image%2020250405001919.png)
+
 هنا اتغير و بيقولك ان `file.txt` هو new file و من الfiles عايزه تcommit, ال`changes to be committed`. و برضو بيديك نصيحه لو عايز ترجع في كلامك عملت Staging بالغلط مثلا اعمل كذا فيرجعه من الStaging ل الunstage.
 
-هانشوفه بقى فالindex لما نعمل `git ls-files`![Pasted%20image%2020250405002532.png](images/Pasted%20image%2020250405002532.png)
+هانشوفه بقى فالindex لما نعمل `git ls-files`
+![Pasted%20image%2020250405002532.png](images/Pasted%20image%2020250405002532.png)
 في برضو حاجه احسن شويه هو option `-s`  مش بس بيعرض الfiles, لا ده بيوريني ال`SHA1` بتاعهم. و بيوريني حاجه اسمها الcreate mode بعرف منها نوع الfile والpermissions بتاعته.والStaging state `0`
+
 ![Pasted%20image%2020250405002833.png](images/Pasted%20image%2020250405002833.png)
 كده انا عرفت ايه اللي عندي فالindex, في file عندي فالindex والfile ده بقى tracked و عن طريق ال`SHA1` بعرف state الFile دلوقتي modified ولا unmodified.
 
-نشوفه في الRepo tree عن طريق الfind ![Pasted%20image%2020250405003635.png](images/Pasted%20image%2020250405003635.png)
-اها اختلف اهو, بقى في عندي object مش object بس ده في folder اسمه `b7` كمان. ![Pasted%20image%2020250405012347.png](images/Pasted%20image%2020250405012347.png)
+نشوفه في الRepo tree عن طريق الfind 
+![Pasted%20image%2020250405003635.png](images/Pasted%20image%2020250405003635.png)
+اها اختلف اهو, بقى في عندي object مش object بس ده في folder اسمه `b7` كمان. 
+![Pasted%20image%2020250405012347.png](images/Pasted%20image%2020250405012347.png)
 
-لو ركزت شويه هتلاقي ان `b7` هما اول 2characters من ال`SHA1` بتاع الfile, وهتلاقي ان اسم الFile اللي جوه  `b7` هو باقي ال`SHA1` ![Pasted%20image%2020250405012718.png](images/Pasted%20image%2020250405012718.png)
+لو ركزت شويه هتلاقي ان `b7` هما اول 2characters من ال`SHA1` بتاع الfile, وهتلاقي ان اسم الFile اللي جوه  `b7` هو باقي ال`SHA1`
+![Pasted%20image%2020250405012718.png](images/Pasted%20image%2020250405012718.png)
 
 دي الطريقه الليgit بيsave بيها ال objects بيستعمل  `Folder structure`, مبيرميش كل objects كده على الroot بتاع الobjects directory,  تنظيم مش اكتر, وبيستعمل ال `SHA1` عشان يدي اسم للfolder والfile.
 الobject او الblob هنا يعني ,هو الfile اللي جوه `b7`.
 
 طب هنا عرفت انه blob عشان انا عارف ان ده file, طب لو عندي عشروميت file و folders اتصرف ازاي؟ ,هعرف منين؟ كل واحد هلاقيه 40 decimal characters هعرف ازاي ان ده اصله tree وده واصله file الى اخره.
-في command اسمه `git cat-file` نفس الcat العادي بس ده بيخليني اقرأ أل content بتاع الcompressed files بتاعة git وهستخدم option`-t` بعد كده ال`SHA1` بتاع الobject.![Pasted%20image%2020250405014651.png](images/Pasted%20image%2020250405014651.png)
+في command اسمه `git cat-file` نفس الcat العادي بس ده بيخليني اقرأ أل content بتاع الcompressed files بتاعة git وهستخدم option`-t` بعد كده ال`SHA1` بتاع الobject.
+![Pasted%20image%2020250405014651.png](images/Pasted%20image%2020250405014651.png)
 
 هو بيقرأ الcontent بس مش بيقرأ كله ال`t-`  بتخليه يقرأ الtype. عشان اشوف الsize هستخدم option`-s`.
 لو تفتكر الshasum كان فيه size, type, and content .
@@ -397,6 +436,7 @@ ____________________________________________________________________
 
 دلوقتي بقى عندي اول version من الproject بتاعي. 
 ![Pasted%20image%2020250405021410.png](images/Pasted%20image%2020250405021410.png)
+
 لو تلاحظ ان مفيش اي حروف جمب اسم الfile "ده لو بتستخدم IDE زي VS Code هما فاهمين git ماشي اذاي"وده معناه ان الfile ده unmodified, اذاً النسخه اللي قدامي دي هي هي اللي فالgit repo.
 
 دلوقتي نشوف الobjects بعد ما عملنا `git commit`, 
@@ -407,7 +447,7 @@ ____________________________________________________________________
 الfile للي عملتله tracking ده, مش موجود في folder صح كده, طب افرض اني مسحت الFile او افرض ان الfile عشان اوصله ادخل foldersكتير وجيت مسحت الfile ده, مش لازم ابقى انا عارف ال tree hierarchy بتاع الfile وهو في انهي folder.
 لذلك لما باجي أcommit الfile مش بcommit ألcontent بس لا, ده انا ب commit ألmetadata بتاع الfile اللي من ضمنها الpath بتاعه.
 
-ف كده في كل مره بعمل فيها commit هكون واخد الblob وكمان واخد الtree بتاعه اللي هو الfolder او  موجموعه الfolders اللي فيها الfile ده.   
+ف كده في كل مره بعمل فيها commit هكون واخد الblob وكمان واخد الtree بتاعه اللي هو الfolder او  موجموعه الfolders اللي فيها الfile ده. 
 ![Pasted%20image%2020250405150247.png](images/Pasted%20image%2020250405150247.png)
 
 لو جيت عدلت فيه تاني او عملت file او عملت folder جديد مثلا, وعملت `git add` و `git commit` تاني, فكده في Version جديد ونفس الكلام تاني عدلت تاني فأصبح في 3versiosns كل واحد فيه 3 او 4 blob مع كام tree. فالحوار هيرخم منين بيودي على فين. ف اعرف منين ان مثلا ال4 blobs دول تبع الversion الفلاني.
