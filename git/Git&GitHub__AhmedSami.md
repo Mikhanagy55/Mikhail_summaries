@@ -43,12 +43,16 @@ ________________________________
 ## 1.Getting started 
 ال version control في منه 3 انواع 
 > 1-**Local Version Control Systems** (***LVC***)
+> 
 > 2-**Central Version Control** (***CVC***)
+> 
 > 3-**Distributed Version Control** (***DVC***) 
+
 
 ##### **Local Version Control Systems** (***LVC***) 
 
 حاجه ليك انت شخصيا. local عندك على الجهاز بتاعك الشغل بتاعك. انت بتعمل الVersion control لنفسك والحاجات اللي انت بتعدلها. لا حد بيشوفه ولا هترفعه ف حته
+
 ![Pasted%20image%2020250402152422.png](images/Pasted%20image%2020250402152422.png)
 
 ________
@@ -130,10 +134,13 @@ _______________________
 # Git Architecture 
 اي Architecture فالدنيا  بيبدأ ب requirements, انت عايز ايه سواء عامله عشانك زي لينوس مثلا "عشان يحط Linux kernel عليه" او عشان الشركه طالبه حاجه معينه, فالاول لازم اكون عارف المشاكل اللي عند الcustomer اللي بيحاول يحلها بالsolution بتاعي. 
 ايه الحاجات اللي اساسي لازم تكون موجوده و الحاجات اللي مش لازم تكون موجوده واللي برضو nice to have و هكذا.  وبنقسم ال requirements ل 
+
 1-`function requirements`
 الfunctions او الحاجات اللي الproduct هيعملها.
+
 2-`nonfunction requirements`
 مثلا صفات الproduct سواء speed, performance, security, etc.
+
 
 عندي file اسمه A.txt هو `version 1`  موجود جوه ال**working Directory or tree** بتاعي.
 فكره الversion control انه مثلا الfile ده عدلت فيه حاجه ف مبقاش ال version بتاع زمان بقى `version 1.1` مثلا. ف انا عايز الversion control بتاعي يtrack الحاجات دي, انه كان في file اسمه A.txt و فلان الفلاني عدل فيه في وقت ما و اصبح version 1.1 بدل version 1. ف انا عايزه يسجل ال versions وكل الكلام ده.
@@ -143,16 +150,30 @@ _______________________
 لكن اللي عليه كل ال copies الversions القديمه هو ال `git repo`.
 
 #### Requirements
+
 1-<mark>**Track Everything**</mark>
+
 بمعني Everything كل ال files كل ال Folders اللي موجوده عندي, ومش أtrack ال content بتاع الfile بس لا كل حاجه سواء content, MetaData, etc.
+
+
 2-<mark>**OS Independent**</mark>
+
 يكون portable مش اروح اعمل الكلام ده على windows مثلا واجي انقله في OS تاني ميشتغلش.
 لازم يكون contained اقدر انقله من windows ل Linux ل mac ويشتغل عادي جدا واشوف كل الhistory, وكمان لما اجي اعمل update لو اصلا الsource code شغال على windows وانا شغال على Linux يشتغل عادي برضو.
+
+
 3-<mark>**Unique ID**</mark>
+
 كل object -"اي حاجه بتtrack it اياً كان .Folder, file ,etc "- لازم يكون ليه `Unique ID`
+
+
 4-<mark>**Track History**</mark>
+
 مش بس اعرف ال versions القديمه لا اشوف مين حصل قبل مين, ومين بعد مين و ايه اللي حصل بعد كذا, ومين عدل وبعدين رجع ف كلامه.
+
+
 5-<mark>**No content change**</mark>
+
 لما تيجي تtrack مثلا file متكتبش حاجه جوه الfile, ت track الfile من غير ما تلمسه. متجيش ناحية الfiles اللي شغال فيها. ولا حتى ال metadata متعدلش مثلا فالProperties بتاعة ال file.
 عشان لو عملت space حتى هيعتبر ده تعديل.
 __________________________________________________________________________
@@ -161,7 +182,7 @@ __________________________________________________________________________
 
 ![Pasted%20image%2020250402225503.png](images/Pasted%20image%2020250402225503.png)
 
-معرفش أtrack everything كده, افرض ال file ده غير اسمه ل b.txt مثلا ف مش هعرف اوصله, 
+معرفش أtrack everything كده, افرض ال file ده غير اسمه ل b.txt مثلا ف مش هعرف اوصله. 
 محتاج انه الحاجه اللي بتعرف او بتميز الobject اللي بعمله tracking ده متكونش جزء من الحاجات اللي بعملها tracking, مبتتغيرش يعني مفيش مجال للتعديل فيها. 
 اسم الfile مميزه ليه ماشي, لكن افرض انا مسحت الfile ده و عملت واحد تاني اسمه برضو A.txt هنلغبط بعض بقى. اصلا الاسم ده من الحاجات اللي انت بتtrack it ف مينفعش تبقى هي الID بتاعك.
 
@@ -170,13 +191,17 @@ __________________________________________________________________________
 >اذا الfiles وال Folders بتتحول ل objects جوه git
 
 **what is git object?**
+
 <mark>**هي الحاجات اللي git بيعملها tracking, في 4 حاجات بيعملها tracking.**</mark>
+
 1-**blob**
+
 ببساطه هو الfile ,هو مش بالظبط. 
 بس الفكره في `tracking everything`,الfile هنعمله tracking هو وال metadata بتاعته, غير الcontent هنtrack ال metadata.
 الmetadata هي نوع الfile, الpermissions, الsize, الname بتاع الfile. ف انا عايز أtrack كل ده, ف مبقاش file زي ما معروف,  فاتغير اسمه ل `blob`.
 
 2-**tree**
+
 هي الfolder بس نفس الفكره زي الblob. اللي هو عشان بتtrack الcontent and metadata فمبقاش الfolder زي ما معروف بقى اسمه `tree`.
 مبقاش folder بقى object فيه الcontent and metadata.
 
@@ -196,6 +221,7 @@ __________________________________________________________________________
 ***____________________________________________________________________________________________***
 
 **how can we apply Unique ID?**
+
 دلوقتي مش هيبقى عندنا file و folder لا, ده عندنا blob و tree. واسماء الfiles والfolders مش هتنفع تبقى identifier. 
 ف احنا محتاجين identifier, محتاج اعرف الobject ده انهي object, وهو Related بأنهي file او folder.
 محتاج حاجه أ unique identify بيها الobject.
@@ -206,7 +232,7 @@ __________________________________________________________________________
 
 ![Pasted%20image%2020250403122821.png](images/Pasted%20image%2020250403122821.png)
 
-ال$X$ ممكن تكون مثلا repo ,character, file, folder اي حاجه, وعلى حسب الالجوريزم اللي بتستخمه الhash function ,بيكون شكل ال$F(x)$, ممكن مثلا تستخدم Algorithm معين فالhashing ف تطلعلي شويهhexadecimal characters وتبقى unique.
+الX ممكن تكون مثلا repo ,character, file, folder اي حاجه, وعلى حسب الالجوريزم اللي بتستخمه الhash function ,بيكون شكل الF(x), ممكن مثلا تستخدم Algorithm معين فالhashing ف تطلعلي شويهhexadecimal characters وتبقى unique.
 >[!note]
 >The output **F(X)** is a **160-bit** hash value, commonly displayed as a **40-character hexadecimal string** (e.g., a1b2c3d4...). This string serves as a unique identifier for the input data **X** within the Git repository, such as a commit, file, or directory.
  .The specific algorithm used in **Git** is **SHA-1** (`Secure Hash Algorithm 1`), a cryptographic hash function.
@@ -218,6 +244,7 @@ __________________________________________________________________________
 
 
 ![Pasted%20image%2020250403130628.png](images/Pasted%20image%2020250403130628.png)
+
 ال**stdin--** عشان ياخد input من الpipeing.
 
 الcommand اللي بيعمل نفس الكلام ده في Linux اسمه`shasum`.
@@ -226,11 +253,13 @@ __________________________________________________________________________
 
 طب ليه الاختلاف مع ان الاتنين بيستخدموا SHA1؟؟
 زي ما احنا عارفين ان git مش بس بياخد الContent بتاع الObject كمان بياخد الmetadata, اللي بيحصل ان git مش بيشوف `Hello, Git` كده لا ده هو بيزود عليها حاجات  هو بيزود 3 حاجات 
-1- type
-
-2-size
-
-3-null character
+>[!important}
+>
+>1- type
+>
+>2-size
+>
+>3-null character
 
 ف لما تديله `Hello, Git` مش هياخدها كده اللي هو حته text وخلاص لا هو بيجود من عنده الاول بعد كده ياخد كله على بعضه ويعمل الhash ل الobject ده.  
 ف هو بيشوفها كده 
@@ -251,6 +280,7 @@ __________________________________________________________________________
 **____________________________________________________________________________________________**
 
 **how can we apply track history?**
+
 هي الطريقه اللي git بيعرف بيها الfile ده اتغير ولا لا. هيعرف منين انك غيرت الfile؟ هيعرف من ال Sha1 ده.
 هيعرف ان في تعديل في تغيير حصل, لو زودت space واحده حتى, هيطلعلك sha1 تانيه خالص.
 اللي بيحصل ان gitبيعمل sha1 على الfile ويقارنه بال sha1 اللي مخزنه عنده فالrepo. لو زي بعض يبقى انت معدلتش حاجه لكن لو مختلفين يبقى حصل تعديل.
@@ -264,25 +294,30 @@ __________________________________________________________________________
 
 ![Pasted%20image%2020250403143540.png](images/Pasted%20image%2020250403143540.png)
 
-That is what is called a **two-tree architecture**.
+>[!note]
+>That is what is called a **two-tree architecture**.
 
 _______________________________________________________________________________
 _
-ومش ده الgit بيعمله. git عنده***three-tree architecture***, 
-in Git architecture introduced 
+ومش ده الgit بيعمله. git عنده **three-tree architecture**. 
+
 اكيد عندي الworking directory و الrepo ,في النص مابينهم بقى موجود tree تانيه اسمها `staging Area` او الindex. هو يبان tree لكن هو physically عباره عن file.
 مثلا عندي File و عدلت فيه بدل ما اوديه مره واحده على الRepo زي ال `two-tree architecture` لا بعمله staging الاول, staging اللي هو بهيأه وبظبطه عشان يتعمله commit والخطوه اللي بعد كده اني اعمله commit ل الrepo.
 طب ايه الCommit دي؟
-معناها هو تrecord ألتعديل بتاع الobject فالrepo. اللي هو بعتمد التعديل ده فالversion control repo بتاعي. 
+
+معناها هو انك تrecord ألتعديل بتاع الobject فالrepo. اللي هو بعتمد التعديل ده فالversion control repo بتاعي. 
+
 ![Pasted%20image%2020250403150600.png](images/Pasted%20image%2020250403150600.png)
 
-هل هو مجرد Step ملهاش لازمه؟
-الstaging area او موضوع الcommit او انك ت save الobject او الversion الجديد ده على خطوتين بيserve اكتر من حاجه, اول حاجه انه بيserve الworkflow بتاعك. بدل ما يبقى عندي 20000 Version اتوه منهم, لا يبقى عندي فرصه اراجع اللي عملته وابص عليه واشوف الفرق بينه وبين اللي فات فالrepo و اقرر قرار نهائي هل اعتمد الكلام ده ولا لا.
+هل هو"staging" مجرد Step ملهاش لازمه؟
+الstaging area او موضوع الcommitting او انك ت save الobject او الversion الجديد ده على خطوتين بيserve اكتر من حاجه, اول حاجه انه بيserve الworkflow بتاعك. بدل ما يبقى عندي  2000Version اتوه منهم, لا يبقى عندي فرصه اراجع اللي عملته وابص عليه واشوف الفرق بينه وبين اللي فات فالrepo و اقرر قرار نهائي هل اعتمد الكلام ده ولا لا.
 
 وبرضو من اللي بتوفرهولي 
+
 لو مثلا عايز اعدل حاجه ف مثلا web project والحاجه دي موجوده يعتبر في كل صفحات الweb project.
 ف هعدل كده في ييجي 100page ولا حاجه, ولكن كل ده تعديل related ل request واحد ,هو حاجه واحده اللي بعدلها مثلا بعدل ارقام الشركه في كل الpages. هما related بس بعدلها ف files كتير.
 ف هعدل كل file واعمله staging وكلهم related لحاجه واحده. that is what is called `batch` 
+
 بعد ما اعمل staging  لكل واحد واخلصهم, هعمل commit مره واحده واعتمد التعديل اللي حصل في كل الpages دي مره واحده, ف يبقى تعديل واحد ل كذا File. فينزل فالRepo ك version واحد بس. 
 
 ودي من الحاجات اللي ممكن استعمل فيها الindex, وممكن برضو استعملها فالTrouble shooting لو حبيت ارجع فالversion أو أrestore. الstaging area هي المنطقه اللي براجع فيها, قبل ماتبقى عندي فالworking tree لازم تاخد بالك ان الworking tree مش folder عمال تلعب فيه وخلاص ده ممكن يكون ال live project بتاعك اللي بيserve فالشركه والناس هتستخدمه, ف مش مكان لعب اعملcommit على طول او أrestore على طول على الworking tree بتاعي لازم اشوف هينفع ولا لا ,لازم اراجع و اقارن واقرر اه او لا وأ harden, finalize or solidify my changes فالworking tree عشان يعدل فالproject. 
