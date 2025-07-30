@@ -1,4 +1,5 @@
 ![18133.png](images/18133.png)
+
 **This summary was created by [Mikha](https://www.linkedin.com/in/mikhail-nagy-99620718a).**  
 I hope you find it helpful. Best regards!
 [**Git and GitHub|شخبط وانت متطمن**](https://youtu.be/Q6G-J54vgKc?si=pUTe-RGv4Uvmb18j)
@@ -31,6 +32,7 @@ I hope you find it helpful. Best regards!
 _________________________________________________________________________________________
 # History of Git  
 ![Pasted%20image%2020250402161612.png](images/Pasted%20image%2020250402161612.png)
+
 المعلم **Linus Torvalds**  بعد ما عمل <mark>**Linux**</mark> ك open source, ف عايز بقى يحط ال Linux Kernel ده في مكان ما بحيث يكون `shared` والناس كلها ت connect عليه و تعدل كمان وت contribute و يرفع تعديلات. 
 ف لجأ لواحده من الVersion control systems اللي موجودين و اختار واحد من اللي كانو متاحين واللي بيقدم خدمة for free. وكان اسمه **<mark>bit keepers</mark>**
 كان خايف انهم ييجوا في يوم ويقولك مفيش حاجه free.
@@ -45,14 +47,17 @@ ________________________________
 
 ##### **Local Version Control Systems** (***LVC***) 
 
-حاجه ليك انت شخصيا. local عندك على الجهاز بتاعك الشغل بتاعك. انت بتعمل الVersion control لنفسك والحاجات اللي انت بتعدلها. لا حد بيشوفه ولا هترفعه ف حته ![Pasted%20image%2020250402152422.png](images/Pasted%20image%2020250402152422.png)
+حاجه ليك انت شخصيا. local عندك على الجهاز بتاعك الشغل بتاعك. انت بتعمل الVersion control لنفسك والحاجات اللي انت بتعدلها. لا حد بيشوفه ولا هترفعه ف حته 
+![Pasted%20image%2020250402152422.png](images/Pasted%20image%2020250402152422.png)
 
 ________
 #### **Central Version Control** (***CVC***) 
 
  مثلا كلنا كprogrammers team شغالين على project للشركه,  وال source code بتاع الproject ده موجود على server في الdata center فالشركه
- و كلنا بن Accessعلى ال server ده عشان نعمل التعديلات اللي عايزينها والتعديلات بتاعتنا بتبقى `live`. ![Pasted%20image%2020250402152851.png](images/Pasted%20image%2020250402152851.png)
-وعشان ندخل ل الserver لازم طبعاََ تكون موجوده فالشركه او في communication شغاله live وال communication بتكون upper running بينك و بين ال server زي ال `SSH` مثلا. 
+ و كلنا بن Accessعلى ال server ده عشان نعمل التعديلات اللي عايزينها والتعديلات بتاعتنا بتبقى`live`. 
+ ![Pasted%20image%2020250402152851.png](images/Pasted%20image%2020250402152851.png)
+ 
+وعشان ندخل ل الserver لازم طبعاََ تكون موجوده فالشركه او في communication شغاله live والcommunication بتكون upper running بينك و بين ال server زي ال `SSH` مثلا. 
 لو في اي وقت او لأي سبب فقدت ال communication  بينك وبين ال server ده مش هتعرف تعمل اي حاحه على ال project.
 >معندكش local copy انت شغال live على الserver`
 
