@@ -413,10 +413,9 @@ ____________________________________________________
 
 >[!note]
 >حتى الحاجات دي ممكن اعدلها, ال`global--` معناها هي global بالنسبه للuser, يعني كل الprojects بتاعتك انت او اي folder تاني انت هتعمله initialization git repo على نفس الجهاز هياخد نفس الname والemail ده. وده بيعدل في file اسمه <mark>**gitconfig./~**</mark>.
+>لكن لو عايز اعمله global بجد اللي هو على الSystem كله لكل الusers  فبنستخدم option تاني اللي هو `system--` وده بيعدل في file اسمه <mark>**etc/.gitconfig/**</mark>.
 >
-لكن لو عايز اعمله global بجد اللي هو على الSystem كله لكل الusers  فبنستخدم option تاني اللي هو `system--` وده بيعدل في file اسمه <mark>**etc/.gitconfig/**</mark>.
->
-وممكن اعمله على الlevel بتاع الproject ده بس من غير `global--` ولا `system--` وده بيعدل في file اسمه <mark>**/.git/config**</mark> 
+>وممكن اعمله على الlevel بتاع الproject ده بس من غير `global--` ولا `system--` وده بيعدل في file اسمه <mark>**/.git/config**</mark> 
 
 ![Pasted%20image%2020250404194808.png](images/Pasted%20image%2020250404194808.png)
 
@@ -593,7 +592,7 @@ ________________________________________________________________________________
 
 اذاً الcommit هي الwrapper اللي بيقولي ان الblobs او الtrees دول اتعدلت كده مع بعض في مره واحده .
 
-![Pasted%20image%2020250405153305.png](images/%20Pasted%20image%2020250405153305.png)
+![Pasted%20image%2020250405153305.png](images/Pasted%20image%2020250405153305.png)
 
 
 و بما ان هو object ف بيبقى ليه `sha1`.
