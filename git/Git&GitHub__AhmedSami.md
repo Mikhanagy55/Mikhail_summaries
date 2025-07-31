@@ -250,8 +250,8 @@ ________________________________________________________________________________
 
 ال**stdin--** عشان ياخد input من الpipeing.
 
-الcommand اللي بيعمل نفس الكلام ده في Linux اسمه`shasum`.
 
+الcommand اللي بيعمل نفس الكلام ده في Linux اسمه`shasum`.
 ![Pasted%20image%2020250403130935.png](images/Pasted%20image%2020250403130935.png)
 
 طب ليه الاختلاف مع ان الاتنين بيستخدموا SHA1؟؟
@@ -355,18 +355,19 @@ ________________________________________________________________________
 ![Pasted%20image%2020250403171557.png](images/Pasted%20image%2020250403171557.png)
 
 >التسلسل الطبيعي
->
+
 1-`git add` :
-> stage files for old files, if new file convert it form untracked to tracked.
+ stage files for old files, if new file convert it form untracked to tracked.
+ 
 لو الfile مش جديد وalready عدلت فيه قبل كده وعملتله 1000 commit قبل كده وجيت عدلت فيه ف  الfile بيبقى `modified`. عدلت ولسه معملتش commit.
->
-> 
+
+ 
 2-`git commit` :
 
 تعتمد التغيرات ك version جديد فال repo. او ال file جديد بتعملي اول version.
 
 
-***____________________________________________________________________________________________***
+____________________________________________________________________________________________
 
 **file states**
 
@@ -592,7 +593,7 @@ ________________________________________________________________________________
 
 اذاً الcommit هي الwrapper اللي بيقولي ان الblobs او الtrees دول اتعدلت كده مع بعض في مره واحده .
 
-![%20Pasted%20image%2020250405153305.png](images/%20Pasted%20image%2020250405153305.png)
+![Pasted%20image%2020250405153305.png](images/%20Pasted%20image%2020250405153305.png)
 
 
 و بما ان هو object ف بيبقى ليه `sha1`.
@@ -1099,16 +1100,19 @@ repository has been through. Next, we’ll cover Git’s killer feature: its bra
 # Git Branching 
 الBranches هي من ضمن الحاجات المهمه في git ودايما هنستعملها, Git بيسهل التعامل معاها خالص.
 
->هعمل الalias كده 
+>هعمل الalias كده
+>
+>
 >`git config --global alias.graph 'log --oneline --decorate --graph --all'`,and run it with <mark>git graph</mark>.
- or `alias Graph='git log --oneline --decorate --graph --all'`, and run it with <mark>Graph</mark>.
+>
+>or `alias Graph='git log --oneline --decorate --graph --all'`, and run it with <mark>Graph</mark>.
 
 ![Pasted%20image%2020250414010317.png](images/Pasted%20image%2020250414010317.png)
 
 زي ما احنا عرفين ان Git بيstore الdata, الcommits بتاعته يعني عن طريق انه بيجمع كل الblobs والtrees تحت الroot tree بتعاهم ويwrap ألكلام ده في Commit بحيث الcommit يبقى فيه الparent commit والroot tree والcommiter وإلى اخره.  
 ![Pasted%20image%2020250413161803.png](images/Pasted%20image%2020250413161803.png)
 
-**___________________________________________________________________________________________**
+___________________________________________________________________________________________
 
 ![Pasted%20image%2020250413162043.png](images/Pasted%20image%2020250413162043.png) [^3]
 
@@ -1147,6 +1151,7 @@ repository has been through. Next, we’ll cover Git’s killer feature: its bra
 ![Pasted%20image%2020250414012118.png](images/Pasted%20image%2020250414012118.png)
 
 و غير الbranch لما شوفنا الstatus و قالك احنا على الtesting branch , كده عملنا switch ل الtesting, فأصبح الtesting هو الcurrent والHEAD بيشاور عليه. 
+
 ![Pasted%20image%2020250414012355.png](images/Pasted%20image%2020250414012355.png)
 
 والMaster وال testing واقفين على الrevision صاحب ال`SHA1` ده.بس الHEAD بيشاور على الtesting ف اذا الtesting هو الcurrent.
@@ -1183,7 +1188,9 @@ repository has been through. Next, we’ll cover Git’s killer feature: its bra
 # Merging Branches
 التعدبلات اللي عملتها فالtesting دي لو انا راضي عنها ممكن اعملها `merging`.
 to merge branches we can use `git merge`.
+
 ![Pasted%20image%2020250426133052.png](images/Pasted%20image%2020250426133052.png)
+
 <mark>__merging testing branch into master branch__</mark>
 
 بعمل الmerge وانا واقف في الbranch اللي هيحصل فيه الmerging.
@@ -1199,8 +1206,11 @@ to merge branches we can use `git merge`.
 لو تلاحظ مفيش كوميت جديد اتعمل للـ merge، المعلم git بيبص على الhistory ويلاقي إن كل اللي محتاج يعمله هو إنه ينقل ألmaster (والـ**HEAD** معاه) للكوميت اللي testing بيشاور عليها.
 
 في option اسمه `merged--` مع `git branch` بيوريني الbranches اللي اتعملها merge في الmaster.
+
 ![Pasted%20image%2020250426172624.png](images/Pasted%20image%2020250426172624.png)
+
 خلاص وظيفه الtesting branch ممكن امسحه عادي كده. <mark>d = delete-</mark>
+
 ![Pasted%20image%2020250426172709.png](images/Pasted%20image%2020250426172709.png)
 
 _______________________________________________________
@@ -1234,12 +1244,15 @@ _______________________________________________________
 ![Pasted%20image%2020250426185128.png](images/Pasted%20image%2020250426185128.png)
 
 كده خلاص Testing اتعلمه merge في الmaster, ف مش محتاجه ممكن امسحه عادي.
-_____________________________________
+___________________________________________________________________
+
 لو شوفت الHEAD  
+
 ![Pasted%20image%2020250426185321.png](images/Pasted%20image%2020250426185321.png) 
 
 هتلاقيه بيقولك انه merge بين الcommits. و هما دول أللي كان بيشاور عليهم ال2branches.
-________________________________________-
+
+_________________________________________________________________________
 
 ساعات ممكن اجي اعمل merge ف يحصل `conflict`  ده بيحصل مثلا لما اكون انا معدل في نفس الfile فال2 branches.  
 **how can we solve this?**
@@ -1250,7 +1263,7 @@ ________________________________________-
 لما بيحصل الconflict ف git بيعدل الfile عن طريق انه ويحط علامات (`<<<<<<<`, `<mark>=</mark>===`, `>>>>>>>`) عشان يوضح التغييرات من الفرعين:
 - التغييرات من master هتبقى تحت <mark>_<<<<<<< HEAD_</mark>.
 - التغييرات من testing هتبقى تحت <mark>_>>>>>>> testing_</mark>.
-- بينهم فاصل (`<mark>=</mark>==`).
+- بينهم فاصل (`==<mark>======</mark>==`).
  ![Pasted%20image%2020250426234859.png](images/Pasted%20image%2020250426234859.png)
 
  
@@ -1275,8 +1288,7 @@ Rebasing is the process of moving or combining a sequence of commits to a new ba
 
 ![Pasted%20image%2020250426235950.png](images/Pasted%20image%2020250426235950.png)
 
-**___________________________________________________________________________________________**
-
+___________________________________________________________________________________________
 
 # working with remotes 
 
@@ -1290,9 +1302,11 @@ Rebasing is the process of moving or combining a sequence of commits to a new ba
 بعد كده يأما اعمل push للmodifications او الupdates بتاعتي او اعمل pull ل الupdates ` Synchronize` ب fetch او pull.
 
 ![Pasted%20image%2020250427003106.png](images/Pasted%20image%2020250427003106.png)
-___________________
+
+___________________________________________________________________________________________
 
 اقدر أconnect على اكتر من remote. 
+
 ![Pasted%20image%2020250427003259.png](images/Pasted%20image%2020250427003259.png)
 
 مثلا في اكتر من شخص على مستوى العالم شغلاين على نفس الrepo وكل واحد عنده النسخه بتاعته بيعدل فيها فأقدر اخد دايما الupdates او أpush التعديلات بتاعتي.
@@ -1317,7 +1331,9 @@ to deal with remotes we can use `git remote`.
 ده الremote
 ![Pasted%20image%2020250427040606.png](images/Pasted%20image%2020250427040606.png)
 
+
 وده الlocal
+
 ![Pasted%20image%2020250427040609.png](images/Pasted%20image%2020250427040609.png)
 
 هاجي اشوف ده فالlocal مثلا اجرب `git status` مش هيحس بيه 
@@ -1366,11 +1382,11 @@ to deal with remotes we can use `git remote`.
 
 بعد كده خطوه ال`git push`. 
 
- **typical work flow.**
-  الطبيعي اني لما بعمل cloning ل الremote repo مش عشان اعدل فالmaster. ممكن اعمل branch خاص بيا انا و بشغلي. وبعدين اعمل ال push. عشان أ synchronize ال branch ده مع الremote repo. وده الطبيعي فالشغل.
-  والشخص اللي شغال على الremote repo ده بيrevise الكلام بتاعك. 
-
-  <mark>اغلب الremote repos بتبقى لمجرد الdevelopment ف ملهاش working tree من الاساس.</mark>
+ >[!typical work flow]
+>  الطبيعي اني لما بعمل cloning ل الremote repo مش عشان اعدل فالmaster. ممكن اعمل branch خاص بيا انا و بشغلي. وبعدين اعمل ال push, عشان أsynchronize الbranch ده مع الremote repo. وده الطبيعي فالشغل.
+>  والشخص اللي شغال على الremote repo ده بيrevise الكلام بتاعك.
+>
+<mark>اغلب الremote repos بتبقى لمجرد الdevelopment ف ملهاش working tree من الاساس.</mark>
 ______________________________________
 
 لو جيت عملت branch في الLocal وعملتله switch  ثم عملتله commit.
@@ -1393,25 +1409,32 @@ ______________________________________
 <mark>__--set-upstream__</mark> = <mark>_-u_</mark>.
 so we can type `git push -u origin feature`
 بقوله وانت بتpush اعمل branch اسمه feature فالorigin. اذا الcommand ده هيعمل feature branch وي synchronize الupdates بتاعته.
+
 ![Pasted%20image%2020250427125047.png](images/Pasted%20image%2020250427125047.png)
 
 ![Pasted%20image%2020250427125013.png](images/Pasted%20image%2020250427125013.png)
 
 واتأكد من ده لما اعمل `git branch` فالremote.
+
 ![Pasted%20image%2020250427125202.png](images/Pasted%20image%2020250427125202.png)
 
 
 كده تمام بالنسبه `git status`
+
 ![Pasted%20image%2020250427125425.png](images/Pasted%20image%2020250427125425.png)
 
  هتلاحظ انه المره دي اداني tracking information بين الlocal والremote عن الfeature branch.
   في الاول كان بيجيب عن الmaster بس. 
-  ______________________________________
+  
+  _________________________________________________________________
+  
   عشان ن synchronize من الremote ل الlocal, عملنا `git fetch` ثم `git merge` الخطوتين دول اقدر اعملهم ب command واحد بس اللي هو `git pull`
+  
   ![Pasted%20image%2020250427130543.png](images/Pasted%20image%2020250427130543.png)
 
 ![Pasted%20image%2020250427130545.png](images/Pasted%20image%2020250427130545.png)
-  _____________________________________
+
+  ______________________________________________________
   
 ![Pasted%20image%2020250427130832.png](images/Pasted%20image%2020250427130832.png) 
 
@@ -1422,7 +1445,7 @@ so we can type `git push -u origin feature`
 هنا بيقولي ان ال feature في قدامه `origin/feature` و  ال master في قدامه `origin/master`. ده what is called `tracking`.
 خلاص انت مش محتاج كل مره اقوله synchronize الbranch الفلاني مع الbranch ده. هو عارف.
 
-**___________________________________________________________________________________________**
+___________________________________________________________________________________________
 
 # points in vs code chapter 
 
@@ -1434,6 +1457,7 @@ so we can type `git push -u origin feature`
 ![Pasted%20image%2020250427143550.png](images/Pasted%20image%2020250427143550.png)
 
 لو نزلت الzip file هاتروح تعمله extract عادي لو فتحته من الterminal هتلاقي في hidden directory اسمه `github.
+
 ` ![Pasted%20image%2020250427143849.png](images/Pasted%20image%2020250427143849.png)
 
 بس مفيش `git.` الrepo يعني.
@@ -1441,6 +1465,7 @@ so we can type `git push -u origin feature`
 وده معناه اني لما عملت download  ل الzip file ده, هو عمل download بجد مش clone.
 
 لو عايز اعمل clone, هلاقيه مديني الURL بتاعه ف ممكن اعمل `<git clone <URL> <name`
+
 ![Pasted%20image%2020250427144515.png](images/Pasted%20image%2020250427144515.png)
 
 ولما اخش الdirectry هلاقيه عرف انه repo 
@@ -1453,6 +1478,7 @@ ________________________________________________
 هو من الحاجات اللي بتخلي git يحقق فكره انه**distributed version control**. 
 
 ممكن انا اعمل repository عادي عن طريق اني أclick على <mark>__New__</mark>.
+
 ![Pasted%20image%2020250427195920.png](images/Pasted%20image%2020250427195920.png)
 
 وبيكون اسم الrepo او الURL بتاعه عباره عن `owner-name/repository-name`. والrepository-name ده اللي انت بتحطه ف حاول تعمله Unique بالنسبه للaccount بتاعك.
