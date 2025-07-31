@@ -508,6 +508,7 @@ ____________________________________________________________________
 هنا اتغير و بيقولك ان `file.txt` هو new file و من الfiles عايزه تcommit, ال`changes to be committed`. و برضو بيديك نصيحه لو عايز ترجع في كلامك عملت Staging بالغلط مثلا اعمل كذا فيرجعه من الStaging ل الunstage.
 
 هانشوفه بقى فالindex لما نعمل `git ls-files`
+
 ![Pasted%20image%2020250405002532.png](images/Pasted%20image%2020250405002532.png)
 
 في برضو حاجه احسن شويه هو option `-s`  مش بس بيعرض الfiles, لا ده بيوريني ال`SHA1` بتاعهم. و بيوريني حاجه اسمها الcreate mode بعرف منها نوع الfile والpermissions بتاعته.والStaging state `0`
