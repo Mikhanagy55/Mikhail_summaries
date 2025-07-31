@@ -136,15 +136,18 @@ _______________________
 ايه الحاجات اللي اساسي لازم تكون موجوده و الحاجات اللي مش لازم تكون موجوده واللي برضو nice to have و هكذا.  وبنقسم ال requirements ل 
 
 1-`function requirements`
+
 الfunctions او الحاجات اللي الproduct هيعملها.
 
 2-`nonfunction requirements`
+
 مثلا صفات الproduct سواء speed, performance, security, etc.
 
 
 عندي file اسمه A.txt هو `version 1`  موجود جوه ال**working Directory or tree** بتاعي.
 فكره الversion control انه مثلا الfile ده عدلت فيه حاجه ف مبقاش ال version بتاع زمان بقى `version 1.1` مثلا. ف انا عايز الversion control بتاعي يtrack الحاجات دي, انه كان في file اسمه A.txt و فلان الفلاني عدل فيه في وقت ما و اصبح version 1.1 بدل version 1. ف انا عايزه يسجل ال versions وكل الكلام ده.
 ف هيبقى عندي الA.txt جوه ال version control.
+
 في git مش بيتقال عليه version control بنقول عليه **repository**  وعشان ندلعه <mark>git repo</mark>.
 ف انا عايز ال`repo` بتاعي يبقى فيه Version 1 و version 1.1, خد بالك ان دايما اللي انت شايفه فال working directory و بتتعامل معاه على الOS هو version واحد بس اللي هو اخر version, انت مش شايف 100 file مثلا.
 لكن اللي عليه كل ال copies الversions القديمه هو ال `git repo`.
@@ -209,7 +212,7 @@ __________________________________________________________________________
 
 4-**Tagged annotation**
 
-***____________________________________________________________________________________________***
+____________________________________________________________________________________________
 
 عشان ن apply فكره ال <mark>**OS Independent**</mark>, الحل الوحيد ان Git ده يبقى عباره ده **simple folder structure** ان git يبقى عباره عن **folder**, احطه فأي حته يتقري و يشتغل. طب والcontent؟ يكون معظمها **simple files** مش Database بقى والكلام ده ممكن نقلل الencryption لأن Already عندي ال security بتاعة ال project و ممكن نعمل compression بس عشان السرعه مش اكتر .
 الrepo ده كله يبقى عباره عن Folder. هيساعدني ابقى portable كل الupdates والmodifications والversions كلها في folder واحد بس, احطه فأي حته اشوف اللي موجود فيه وكل الsnapshots وكل ده.
@@ -218,7 +221,7 @@ __________________________________________________________________________
  نروح للworking directory اللي فيه ال files وال folders اللي بتtrack it, الgit repo بقى اللي جواه كل الsnapshots وال objects, هيبقى جوه الWorking tree ده شخصياً. بيبقى `hidden folder`, اسمه <mark>git.</mark> ده هيحول لي الproject folder كمان ويسميه `repo`.
 الrepo = الproject folder بتاعي اللي جواه ال`git.`. الrepo ده لما انقله من مكان ل مكان, من server ل server, من Linux ل windows  اياً كان ف كله شايف نفس الحاجه ونفس الversions و بيستعمل نفس ال commands, ايوه identical.
 
-***____________________________________________________________________________________________***
+____________________________________________________________________________________________
 
 **how can we apply Unique ID?**
 
@@ -253,7 +256,7 @@ __________________________________________________________________________
 
 طب ليه الاختلاف مع ان الاتنين بيستخدموا SHA1؟؟
 زي ما احنا عارفين ان git مش بس بياخد الContent بتاع الObject كمان بياخد الmetadata, اللي بيحصل ان git مش بيشوف `Hello, Git` كده لا ده هو بيزود عليها حاجات  هو بيزود 3 حاجات 
->[!important}
+>[!important]
 >
 >1- type
 >
@@ -277,7 +280,7 @@ __________________________________________________________________________
 لو جربت ت pass الformat اللي git بيشوفها وبيعملها ل`shasum`  هيطلعلك نفس ال$f(x)$ او نفس الhexadecimal characters.
 وgit بيعمل الsha1 عشان يتأكد ان مفيش اي تغيير. وهي الRequierment الجايه.
 
-**____________________________________________________________________________________________**
+____________________________________________________________________________________________
 
 **how can we apply track history?**
 
@@ -285,11 +288,11 @@ __________________________________________________________________________
 هيعرف ان في تعديل في تغيير حصل, لو زودت space واحده حتى, هيطلعلك sha1 تانيه خالص.
 اللي بيحصل ان gitبيعمل sha1 على الfile ويقارنه بال sha1 اللي مخزنه عنده فالrepo. لو زي بعض يبقى انت معدلتش حاجه لكن لو مختلفين يبقى حصل تعديل.
 
-**____________________________________________________________________________________________**
+___________________________________________________________________________________________
 
 الversion control systems اللي كانوا موجودين قبل كده قبل git يعني واللي منهم لسه موجودين لحد دلوقتي. 
-كانوا بيعتمودا حاجه اسمه `two-tree architecture`
-اللي هو يبقى عندي الworking tree والRepo, انا اشتغل فالworking tree وبعدين اعمل التعديلات  بتاعتي و ا push التعديلات دي على الrepo و الrepo بيخزنها. جيت وقت تاني عملت تعديلات وبعدين أpush اللي عملته ف يخزن version جديد ويشيل.
+كانوا بيعتمودا حاجه اسمها **two-tree architecture**. اللي هو يبقى عندي الworking tree والRepo, انا اشتغل فالworking tree وبعدين اعمل التعديلات  بتاعتي و ا push التعديلات دي على الrepo و الrepo بيخزنها. جيت وقت تاني عملت تعديلات وبعدين أpush اللي عملته ف يخزن version جديد ويشيل.
+
 ف كده انا عندي 2trees واحد الWorking tree اللي بفتح اشوف فيه الfiles واعدل فيه او الOS يعني , والتاني اللي متخزن فيه الversion control والobjects. 
 
 ![Pasted%20image%2020250403143540.png](images/Pasted%20image%2020250403143540.png)
@@ -309,13 +312,14 @@ _
 
 ![Pasted%20image%2020250403150600.png](images/Pasted%20image%2020250403150600.png)
 
-هل هو"staging" مجرد Step ملهاش لازمه؟
+هل ال"staging" مجرد Step ملهاش لازمه؟
+
 الstaging area او موضوع الcommitting او انك ت save الobject او الversion الجديد ده على خطوتين بيserve اكتر من حاجه, اول حاجه انه بيserve الworkflow بتاعك. بدل ما يبقى عندي  2000Version اتوه منهم, لا يبقى عندي فرصه اراجع اللي عملته وابص عليه واشوف الفرق بينه وبين اللي فات فالrepo و اقرر قرار نهائي هل اعتمد الكلام ده ولا لا.
 
 وبرضو من اللي بتوفرهولي 
 
 لو مثلا عايز اعدل حاجه ف مثلا web project والحاجه دي موجوده يعتبر في كل صفحات الweb project.
-ف هعدل كده في ييجي 100page ولا حاجه, ولكن كل ده تعديل related ل request واحد ,هو حاجه واحده اللي بعدلها مثلا بعدل ارقام الشركه في كل الpages. هما related بس بعدلها ف files كتير.
+ف هعدل كده في ييجي 100page ولا حاجه, ولكن كل ده تعديل related ل request واحد, هو حاجه واحده اللي بعدلها مثلا بعدل ارقام الشركه في كل الpages. هما related بس بعدلها ف files كتير.
 ف هعدل كل file واعمله staging وكلهم related لحاجه واحده. that is what is called `batch` 
 
 بعد ما اعمل staging  لكل واحد واخلصهم, هعمل commit مره واحده واعتمد التعديل اللي حصل في كل الpages دي مره واحده, ف يبقى تعديل واحد ل كذا File. فينزل فالRepo ك version واحد بس. 
@@ -330,14 +334,18 @@ _____
 
 # Git File States
 **الindex و ايه اللي بيحصل فيه؟**
+
 الindex او الstaging area ده هو مجرد file. 
-لو لأول مره بintialize الrepo بتاعي 
+
 ![Pasted%20image%2020250403155527.png](images/Pasted%20image%2020250403155527.png)
 
-فgit هنا ميعرفش اي حاجه عن الFile اللي فالworking tree بتاعي,  الState او الحاله بتاعة الfile ده دلوقتي اسمها `UNtracked`. يعني git شايفه بس مش متابع فيه اي حاجه, عدل زي ما انت عايز واصلا Git مش متابع الversions بتاعته معندوش منه objects او snapshots او اي حاجه ليها علاقه بيه.
+لو لأول مره بintialize الrepo بتاعي, فgit هنا ميعرفش اي حاجه عن الFile اللي فالworking tree بتاعي,  الState او الحاله بتاعة الfile ده دلوقتي اسمها `UNtracked`. يعني git شايفه بس مش متابع فيه اي حاجه, عدل زي ما انت عايز واصلا Git مش متابع الversions بتاعته معندوش منه objects او snapshots او اي حاجه ليها علاقه بيه.
 
-اول حاجه طبيعي بعملها فالWork Flow بتاعي اني بstage الfile ده بضيفه ل الindex. هي اني بحول الfile ده من`untracked` ل `tracked`. وده عن طريق الstaging. هنا بقى ييجي يدور الstaging area 
+اول حاجه طبيعي بعملها فالWork Flow بتاعي اني بstage الfile ده بضيفه ل الindex. هي اني بحول الfile ده من`untracked` ل `tracked`. وده عن طريق الstaging. هنا بقى ييجي يدور الstaging area.
+
+
 ايه اللي بيحصل لما اجي احوله من untracked ل tracked؟
+
 اول حاجه بتحصل انه بيتعمله `SHA`,ثم بنعمله tracking عن طريق Command اسمه `git add`. اللي بيحصل لما اعمل `git add` لuntracked file, انه بيتسجل فالindex  او الstaging area, ال`SHA` بتاعه بيتكتب فالindex. بعد ما يتسجل فالindex, بييجي git يقوم ي initialize object ليه فالrepo, يintialize blob ليه فالrepo بنفس الSHA1 بتاعه اللي موجود فالindex. 
 كل ده ولسه git معملوش version1. هو عمله tracking بس. الversion بيتعمل فالخطوه التانيه لما اعمل `git commit`  لما اعتمد.
 
@@ -358,14 +366,21 @@ _____
 **file states**
 
 بالنسبه ل git بيشوف الfiles ازاي؟ 
-الكلام ده جوه الrepo
+
+`الكلام ده جوه الrepo`
 ![Pasted%20image%2020250403174710.png](images/Pasted%20image%2020250403174710.png)
 
 اي file عندي بيبقى ليه حاله من اتنين. Either `untracked(U)` or `tracked`.
+
 الtracked بقى بيبقى `(M)modified` او `unmodified`
+
+
 1-`modified(M)`
+
 يعني اخر version من الfile فالrepo اتغيرت, انت عدلت فالworking tree ف كده الfile اللي قدامك فالworking tree مش هو هو اخر version فالrepo.
 ف git بيقولك اخر version عندي من الobject ده غير اللي عندك فالworking tree فظبط نفسك بقى.
+
+
 2-`unmodified`
 يعني بعد ما عدلت فيه وعملت `git commit` وبقى في نسخه. ف اصبح ان اخر version عندي فالrepo  هو هو نفس الversion اللي قدامي فالworking tree.
 
@@ -382,29 +397,33 @@ ____________________________________________________
 
 
 بس قبل ما اعمل الinitialization والfolder بتاع git وكل ده في configuration مهم لازم اعمله لgit.
+
 هو اني بس اكتب اسمي والemail بتاعي, ده  اقل Configuration ممكن يحصل, في configurations كتير ممكن تحصل, ممكن اشوف الlist بتاعة الconfiguration  اللي في git. هو فالاول وفالاخر مجرد file  اسمه `config file` واقدر اعدل فيه manual عاي.
 
 ![Pasted%20image%2020250404185128.png](images/Pasted%20image%2020250404185128.png)
 
 ده عشان لما اجي اعمل الstaging بتاع الfile او الcommit و ابعت الversion على الrepo بتاعي لازم يسجل ويقول مين اللي عمل التعديل ده مين اللي اعتمد الكلام ده. ده distributed version control فلازم يسجل ان فالوقت كذا فلان الفلاني عمل كذا كذا. يعني بيtrack history بي track everything. 
 
-note 
-حتى الحاجات دي ممكن اعدلها, ال`global--` معناها هي global بالنسبه للuser, يعني كل الprojects بتاعتك انت او اي folder تاني انت هتعمله initialization git repo على نفس الجهاز هياخد نفس الname والemail ده. وده بيعدل في file اسمه <mark>**gitconfig./~**</mark>.
-لكن لو عايز اعمله global بجد اللي هو على الSystem كله لكل الusers  فبنستخدم option تاني اللي 
-هو `system--` وده بيعدل في file اسمه <mark>**etc/.gitconfig/**</mark>.
-وممكن اعمله على الlevel بتاع الproject ده بس من غير `global--` ولا `system--` وده بيعدل في file اسمه 
-<mark>**/.git/config**</mark> 
+>[!note]
+>حتى الحاجات دي ممكن اعدلها, ال`global--` معناها هي global بالنسبه للuser, يعني كل الprojects بتاعتك انت او اي folder تاني انت هتعمله initialization git repo على نفس الجهاز هياخد نفس الname والemail ده. وده بيعدل في file اسمه <mark>**gitconfig./~**</mark>.
+>
+لكن لو عايز اعمله global بجد اللي هو على الSystem كله لكل الusers  فبنستخدم option تاني اللي هو `system--` وده بيعدل في file اسمه <mark>**etc/.gitconfig/**</mark>.
+>
+وممكن اعمله على الlevel بتاع الproject ده بس من غير `global--` ولا `system--` وده بيعدل في file اسمه <mark>**/.git/config**</mark> 
 
 ![Pasted%20image%2020250404194808.png](images/Pasted%20image%2020250404194808.png)
 
 
 لو عايز اشوف الConfiguratio هستعمل 
+
 ![Pasted%20image%2020250404195540.png](images/Pasted%20image%2020250404195540.png)
 
 كده انا جاهز اني استعمل Git.  فهروح ل الproject folder و أinitialize الgit repo,
+
 ![Pasted%20image%2020250404202102.png](images/Pasted%20image%2020250404202102.png)
 
 خلاص عملت ألproject Folder وعملت file جواه, اشتغلت فيه يعني. عايز بقى أinitialize git جواه و احول الproject Folder ده الى Repository ,ف هعمل ده عن طريق اني اقوله `git init` لاحظ انك لازم تexecute ألcommand ده من جوه الproject folder. اول ما تexecute الCommand ده, بيتعمل folder مخفي إسمه `git.`، وده اللي بيخزن كل الـ versions والتاريخ بتاع الproject.
+
 ![Pasted%20image%2020250404202848.png](images/Pasted%20image%2020250404202848.png)
 
 
@@ -438,6 +457,7 @@ ____________________________________________________________________
 احنا عندنا three-trees ال<mark>working tree</mark> وال<mark>staging tree</mark> اللي هو الindex وال<mark>repo tree</mark> اللي هو فيه الversions والcommits و الobjects وكل ده. عشان ال**three-tree architecture**.
 
 طب لو انا عايز اشوف اللي في ده وفي ده, مثلا ابسط حاجه هاشوف اللي فالworking tree بالcommand `ls`
+
 ![Pasted%20image%2020250404232116.png](images/Pasted%20image%2020250404232116.png)
 
 زي كده بقى انا عايز اشوف الحاجات اللي فالindex اللي هو فالStaging areaوالحاجات اللي فالrepo, اعمل ايه؟
@@ -449,13 +469,18 @@ ____________________________________________________________________
 
 بالنسه للrepo مفيش command مباشر, بس في طريقه في technique من Linux نفسه.
 ممكن استخدم find command عشان اشوف حاجه معينه بدور عليها مثلا بدور على الobjects اللي من نوع file 
+
 ![Pasted%20image%2020250404234348.png](images/Pasted%20image%2020250404234348.png)
 
 يبقى كده عندي file واحد فالworking tree والrepo والindex فاضيين.
+
 ![Pasted%20image%2020250404234603.png](images/Pasted%20image%2020250404234603.png)
+
 ف اول خطوه عندي اني أstaged الfiles اللي عندي عن طريق `git add`. في الحاله دي `git add` بيحول الfile من `(U)untracked` الى `tracked`. و بيجهزوا لأول commit.  
 الطبيعي اني هكتب `git add` وبعدها اسم الfile.
+
 ![Pasted%20image%2020250405000851.png](images/Pasted%20image%2020250405000851.png)
+
 
 يعني لو 100 file فالproject هقعد اضيفهم file file ?!!
 اقدر استعمل الregular expressions وال glob patterns بتاع الfile names
@@ -487,6 +512,7 @@ ____________________________________________________________________
 ![Pasted%20image%2020250405012347.png](images/Pasted%20image%2020250405012347.png)
 
 لو ركزت شويه هتلاقي ان `b7` هما اول 2characters من ال`SHA1` بتاع الfile, وهتلاقي ان اسم الFile اللي جوه  `b7` هو باقي ال`SHA1` 
+
 ![Pasted%20image%2020250405012718.png](images/Pasted%20image%2020250405012718.png)
 
 دي الطريقه الليgit بيsave بيها ال objects بيستعمل  `Folder structure`, مبيرميش كل objects كده على الroot بتاع الobjects directory,  تنظيم مش اكتر, وبيستعمل ال `SHA1` عشان يدي اسم للfolder والfile.
@@ -494,6 +520,7 @@ ____________________________________________________________________
 
 طب هنا عرفت انه blob عشان انا عارف ان ده file, طب لو عندي عشروميت file و folders اتصرف ازاي؟ ,هعرف منين؟ كل واحد هلاقيه 40 decimal characters هعرف ازاي ان ده اصله tree وده واصله file الى اخره.
 في command اسمه `git cat-file` نفس الcat العادي بس ده بيخليني اقرأ أل content بتاع الcompressed files بتاعة git وهستخدم option`-t` بعد كده ال`SHA1` بتاع الobject.
+
 ![Pasted%20image%2020250405014651.png](images/Pasted%20image%2020250405014651.png)
 
 هو بيقرأ الcontent بس مش بيقرأ كله ال`t-`  بتخليه يقرأ الtype. عشان اشوف الsize هستخدم option`-s`.
@@ -519,10 +546,13 @@ ____________________________________________________________________
 
 دلوقتي بقى عندي اول version من الproject بتاعي. 
 ![Pasted%20image%2020250405021410.png](images/Pasted%20image%2020250405021410.png)
+
 لو تلاحظ ان مفيش اي حروف جمب اسم الfile "ده لو بتستخدم IDE زي VS Code هما فاهمين git ماشي اذاي"وده معناه ان الfile ده unmodified, اذاً النسخه اللي قدامي دي هي هي اللي فالgit repo.
 
 دلوقتي نشوف الobjects بعد ما عملنا `git commit`, 
+
 ![Pasted%20image%2020250405134335.png](images/Pasted%20image%2020250405134335.png)
+
 ايه ده 3objects!! ده انا معنديش غير blob واحده بس.
 
 احنا اتفقنا اننا لازم ن apply فكره `track everything` و`track history` و `Unique ID
@@ -530,6 +560,7 @@ ____________________________________________________________________
 لذلك لما باجي أcommit الfile مش بcommit ألcontent بس لا, ده انا ب commit ألmetadata بتاع الfile اللي من ضمنها الpath بتاعه.
 
 ف كده في كل مره بعمل فيها commit هكون واخد الblob وكمان واخد الtree بتاعه اللي هو الfolder او  موجموعه الfolders اللي فيها الfile ده.   
+
 ![Pasted%20image%2020250405150247.png](images/Pasted%20image%2020250405150247.png)
 
 لو جيت عدلت فيه تاني او عملت file او عملت folder جديد مثلا, وعملت `git add` و `git commit` تاني, فكده في Version جديد ونفس الكلام تاني عدلت تاني فأصبح في 3versiosns كل واحد فيه 3 او 4 blob مع كام tree. فالحوار هيرخم منين بيودي على فين. ف اعرف منين ان مثلا ال4 blobs دول تبع الversion الفلاني.
