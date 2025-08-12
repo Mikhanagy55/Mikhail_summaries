@@ -62,7 +62,7 @@ ________
  و كلنا بن Accessعلى ال server ده عشان نعمل التعديلات اللي عايزينها والتعديلات بتاعتنا بتبقى `live`.
  ![Pasted%20image%2020250402152851.png](images/Pasted%20image%2020250402152851.png)
  
-وعشان ندخل ل الserver لازم طبعاََ تكون موجوده فالشركه او في communication شغاله live وال communication بتكون upper running بينك و بين ال server زي ال `SSH` مثلا. 
+وعشان ندخل ل الserver لازم طبعاََ تكون موجوده فالشركه او في communication شغاله live وال communication بتكون up & running بينك و بين ال server زي ال `SSH` مثلا. 
 لو في اي وقت او لأي سبب فقدت ال communication  بينك وبين ال server ده مش هتعرف تعمل اي حاحه على ال project.
 >معندكش local copy انت شغال live على الserver`
 
